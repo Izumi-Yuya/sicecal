@@ -41,7 +41,8 @@
                     <label for="name" class="form-label">UserName</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" 
                            placeholder="任意のユーザー名を入力" 
-                           value="{{ old('name') }}" required>
+                           value="{{ old('name') }}" 
+                           autocomplete="username" required>
                     @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -51,7 +52,8 @@
                 <div class="form-group">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" 
-                           placeholder="任意のパスワードを入力" required>
+                           placeholder="任意のパスワードを入力" 
+                           autocomplete="current-password" required>
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -70,7 +72,8 @@
                 --}}
                 <div class="form-group">
                     <label for="user_type" class="form-label">Role</label>
-                    <select class="form-control @error('user_type') is-invalid @enderror" id="user_type" name="user_type" required>
+                    <select class="form-control @error('user_type') is-invalid @enderror" id="user_type" name="user_type" 
+                            autocomplete="organization-title" required>
                         <option value="">役割を選択してください</option>
                         <option value="system_admin" {{ old('user_type') == 'system_admin' ? 'selected' : '' }}>システム管理者</option>
                         <option value="editor" {{ old('user_type') == 'editor' ? 'selected' : '' }}>編集者</option>

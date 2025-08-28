@@ -36,21 +36,24 @@
                     <label for="name" class="form-label">UserName</label>
                     <input type="text" class="form-control " id="name" name="name" 
                            placeholder="任意のユーザー名を入力" 
-                           value="" required>
+                           value="" 
+                           autocomplete="username" required>
                                     </div>
                 
                 <!-- Password Field -->
                 <div class="form-group">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control " id="password" name="password" 
-                           placeholder="任意のパスワードを入力" required>
+                           placeholder="任意のパスワードを入力" 
+                           autocomplete="current-password" required>
                                     </div>
                 
                 <!-- Role Selection Field -->
                 
                 <div class="form-group">
                     <label for="user_type" class="form-label">Role</label>
-                    <select class="form-control " id="user_type" name="user_type" required>
+                    <select class="form-control " id="user_type" name="user_type" 
+                            autocomplete="organization-title" required>
                         <option value="">役割を選択してください</option>
                         <option value="system_admin" >システム管理者</option>
                         <option value="editor" >編集者</option>
