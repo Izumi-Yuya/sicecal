@@ -153,6 +153,9 @@
 
     @stack('scripts')
     
+    <!-- Static Site JavaScript for GitHub Pages -->
+    <script src="{{ asset('js/static-site.js') }}"></script>
+    
     <!-- Bootstrap JavaScript for dropdown functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {

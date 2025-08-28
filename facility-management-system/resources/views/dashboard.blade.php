@@ -38,11 +38,11 @@
                     <div>
                         <h5 class="mb-1 text-dark">
                             <i class="bi bi-person-circle me-2"></i>
-                            {{ session('user.name') }}さん、おかえりなさい
+                            <span data-user-name>{{ session('user.name', 'デモユーザー') }}さん、おかえりなさい</span>
                         </h5>
                         <p class="mb-0 text-muted">
-                            <span class="badge bg-primary me-2">{{ session('user.role_display') }}</span>
-                            最終ログイン: {{ session('user.logged_in_at')->format('Y年m月d日 H:i') }}
+                            <span class="badge bg-primary me-2" data-user-role>{{ session('user.role_display', 'システム管理者') }}</span>
+                            <span data-login-time>最終ログイン: {{ session('user.logged_in_at', now())->format('Y年m月d日 H:i') }}</span>
                         </p>
                     </div>
                     <div class="text-end">

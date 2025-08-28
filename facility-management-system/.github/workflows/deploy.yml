@@ -1,0 +1,104 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: facility-management-system/package-lock.json
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
+
+    - name: Install Composer dependencies
+      working-directory: facility-management-system
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: Install NPM dependencies
+      working-directory: facility-management-system
+      run: npm ci
+
+    - name: Create environment file
+      working-directory: facility-management-system
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+
+    - name: Build assets
+      working-directory: facility-management-system
+      run: npm run build
+
+    - name: Generate static files
+      working-directory: facility-management-system
+      run: |
+        php artisan config:cache
+        php artisan route:cache
+        php artisan view:cache
+
+    - name: Create static site structure
+      working-directory: facility-management-system
+      run: |
+        mkdir -p ../docs
+        cp -r public/* ../docs/
+        
+        # Create index.html that redirects to login
+        cat > ../docs/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>Shise-Cal - 施設管理システム</title>
+            <meta http-equiv="refresh" content="0; url=./login.html">
+            <link rel="canonical" href="./login.html">
+        </head>
+        <body>
+            <p>Redirecting to <a href="./login.html">login page</a>...</p>
+        </body>
+        </html>
+        EOF
+
+    - name: Generate static HTML pages
+      working-directory: facility-management-system
+      run: |
+        # Generate login page
+        php artisan tinker --execute="
+        \$content = view('auth.login')->render();
+        file_put_contents('../docs/login.html', \$content);
+        "
+        
+        # Generate dashboard page (with mock session data)
+        php artisan tinker --execute="
+        session(['user' => [
+            'name' => 'デモユーザー',
+            'role' => 'system_admin',
+            'role_display' => 'システム管理者',
+            'logged_in_at' => now()
+        ]]);
+        \$content = view('dashboard')->render();
+        file_put_contents('../docs/dashboard.html', \$content);
+        "
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        publish_branch: gh-pages
