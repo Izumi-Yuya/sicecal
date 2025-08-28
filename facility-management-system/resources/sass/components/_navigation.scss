@@ -8,12 +8,13 @@
 .shise-header {
     position: fixed;
     width: 100%;
-    height: 64px;
+    height: $header-height;
     left: 0;
     top: 0;
     background: linear-gradient(90deg, $gradient-start 20%, $gradient-end 80%);
     z-index: 1030;
     box-shadow: $header-shadow;
+    transition: box-shadow 0.2s ease;
 
     .container-fluid {
         height: 100%;
@@ -22,19 +23,29 @@
         padding: 0 $spacing-10;
         position: relative;
     }
+
+    // Desktop-first responsive behavior
+    @media (max-width: 991.98px) {
+        position: relative;
+        z-index: 1040;
+    }
 }
 
 // Logo component
 .shise-logo {
     display: flex;
     align-items: center;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 
     .logo-image {
         width: 156px;
         height: 55px;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
+        object-fit: contain;
+        transition: opacity 0.2s ease;
     }
 
     .logo-fallback {
@@ -50,10 +61,11 @@
             align-items: center;
             justify-content: center;
             margin-right: $spacing-3;
+            box-shadow: $shadow-xs;
 
             i {
                 font-size: $font-size-xl;
-                color: $white;
+                color: $gray-800;
             }
         }
 
@@ -61,8 +73,32 @@
             font-family: $font-family-heading;
             font-size: $font-size-xl;
             font-weight: $font-weight-semibold;
-            color: $white;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            color: $gray-800;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    // Responsive logo sizing
+    @media (max-width: 767.98px) {
+        .logo-image {
+            width: 120px;
+            height: 42px;
+        }
+
+        .logo-fallback {
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                margin-right: $spacing-2;
+
+                i {
+                    font-size: $font-size-lg;
+                }
+            }
+
+            .logo-text {
+                font-size: $font-size-lg;
+            }
         }
     }
 }
@@ -79,7 +115,7 @@
         min-width: 200px;
         max-width: 300px;
         height: 44px;
-        border: $border-width-1 solid $black;
+        border: $border-width-1 solid $gray-800;
         background-color: $overlay-light;
         color: $text-primary;
         font-family: $font-family-heading;
@@ -93,37 +129,53 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        border-radius: $border-radius-sm;
+        border-radius: $button-border-radius;
         transition: all 0.2s ease;
+        box-shadow: $button-shadow;
 
         &:hover {
             background-color: $white;
-            border-color: $black;
+            border-color: $gray-800;
             color: $text-primary;
+            transform: translateY(-1px);
+            box-shadow: $button-shadow-hover;
         }
 
         &:focus {
             background-color: $white;
-            border-color: $black;
+            border-color: $gray-800;
             color: $text-primary;
-            box-shadow: none;
+            box-shadow: $focus-shadow-primary;
+        }
+
+        &:active {
+            transform: translateY(0);
         }
     }
 
     .dropdown-menu {
-        border: $border-width-1 solid $black;
-        border-radius: $border-radius-sm;
+        border: $border-width-1 solid $border-color;
+        border-radius: $modal-border-radius;
         box-shadow: $dropdown-shadow;
+        margin-top: $spacing-2;
 
         .dropdown-item {
             color: $text-primary;
             font-size: $font-size-sm;
-            padding: $spacing-2 $spacing-4;
-            transition: background-color 0.2s ease;
+            padding: $spacing-3 $spacing-4;
+            transition: all 0.2s ease;
+            border-radius: $border-radius-sm;
+            margin: $spacing-1 $spacing-2;
 
             &:hover {
                 background-color: $bg-secondary;
-                color: $text-primary;
+                color: $primary;
+            }
+
+            &:focus {
+                background-color: $bg-secondary;
+                color: $primary;
+                outline: none;
             }
 
             i {
@@ -134,6 +186,47 @@
 
         .dropdown-divider {
             border-color: $border-color;
+            margin: $spacing-2 0;
+        }
+    }
+
+    // Mobile menu toggle button
+    .btn-outline-secondary {
+        border-color: $gray-800;
+        color: $gray-800;
+        background-color: $overlay-light;
+        border-radius: $button-border-radius;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: $white;
+            border-color: $gray-800;
+            color: $gray-800;
+        }
+
+        &:focus {
+            box-shadow: $focus-shadow-primary;
+        }
+    }
+
+    // Responsive behavior
+    @media (max-width: 991.98px) {
+        position: static;
+        transform: none;
+        margin-left: auto;
+
+        .approver-btn {
+            min-width: 120px;
+            max-width: 200px;
+            font-size: $font-size-base;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .approver-btn {
+            min-width: 100px;
+            font-size: $font-size-sm;
+            padding: $spacing-2 $spacing-3;
         }
     }
 }
@@ -144,21 +237,64 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: $spacing-3 0 0;
+    padding: $spacing-4 0 0;
     position: fixed;
     width: $sidebar-width;
-    height: calc(100vh - 64px);
+    height: calc(100vh - #{$header-height});
     left: 0;
-    top: 64px;
-    border-right: $border-width-1 solid $border-dark;
+    top: $header-height;
+    border-right: $border-width-1 solid $border-color;
     box-shadow: $shadow-sm;
     background: $white;
     z-index: 1020;
+    transition: transform 0.3s ease, box-shadow 0.2s ease;
 
+    // Desktop fixed sidebar
+    @media (min-width: 992px) {
+        transform: translateX(0);
+    }
+
+    // Tablet collapsible sidebar (overlay)
     @media (max-width: 991.98px) {
-        position: relative;
-        width: 100%;
-        height: auto;
+        position: fixed;
+        transform: translateX(-100%);
+        z-index: 1050;
+        box-shadow: $shadow-lg;
+
+        &.show {
+            transform: translateX(0);
+        }
+    }
+
+    // Mobile off-canvas behavior
+    @media (max-width: 575.98px) {
+        width: 280px;
+        height: 100vh;
+        top: 0;
+        padding-top: $spacing-20;
+    }
+}
+
+// Sidebar backdrop for mobile/tablet
+.sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $overlay-dark;
+    z-index: 1040;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    &.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    @media (min-width: 992px) {
+        display: none;
     }
 }
 
@@ -168,49 +304,90 @@
     flex-direction: column;
     align-items: center;
     padding: 0;
-    gap: $spacing-6;
-    width: $sidebar-width;
+    gap: $spacing-2;
+    width: 100%;
+    padding: 0 $spacing-4;
 
     .nav-item {
-        width: 221px;
-        height: 43px;
-        border-radius: $border-radius-md;
+        width: 100%;
         margin-bottom: $spacing-1;
     }
 
     .nav-link {
         display: flex;
         align-items: center;
-        padding: $spacing-3;
+        padding: $spacing-3 $spacing-4;
         width: 100%;
-        height: 100%;
         color: $text-primary;
         font-family: $font-family-base;
-        font-weight: $font-weight-semibold;
+        font-weight: $font-weight-medium;
         font-size: $font-size-sm;
         line-height: $line-height-normal;
         text-decoration: none;
         border-radius: $border-radius-md;
         transition: all 0.2s ease;
+        position: relative;
 
         &:hover {
             background-color: $bg-secondary;
             color: $primary;
             text-decoration: none;
+            transform: translateX(2px);
         }
 
         &.active {
-            background-color: lighten($primary, 45%);
-            color: $black;
+            background-color: rgba($primary, 0.1);
+            color: $primary;
+            font-weight: $font-weight-semibold;
             border-right: 3px solid $primary;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background-color: $primary;
+                border-radius: 0 $border-radius-sm $border-radius-sm 0;
+            }
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: inset 0 0 0 2px rgba($primary, 0.3);
         }
 
         i {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             font-size: $font-size-lg;
             line-height: 1;
             margin-right: $spacing-3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        &:hover i {
+            transform: scale(1.1);
+        }
+    }
+
+    // Navigation section headers
+    .nav-header {
+        width: 100%;
+        padding: $spacing-4 $spacing-4 $spacing-2;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: $text-muted;
+        text-transform: uppercase;
+        letter-spacing: $letter-spacing-wide;
+        margin-top: $spacing-4;
+
+        &:first-child {
+            margin-top: 0;
         }
     }
 }

@@ -61,4 +61,102 @@ document.addEventListener('DOMContentLoaded', function () {
             form.classList.add('was-validated');
         });
     });
+
+    // Sidebar toggle functionality for responsive behavior
+    const sidebarToggle = document.querySelector('[data-bs-toggle="offcanvas"]');
+    const sidebar = document.querySelector('.shise-sidebar');
+    const content = document.querySelector('.shise-content');
+    let sidebarBackdrop = null;
+
+    function createBackdrop() {
+        if (!sidebarBackdrop) {
+            sidebarBackdrop = document.createElement('div');
+            sidebarBackdrop.className = 'sidebar-backdrop';
+            document.body.appendChild(sidebarBackdrop);
+
+            sidebarBackdrop.addEventListener('click', closeSidebar);
+        }
+    }
+
+    function showSidebar() {
+        if (window.innerWidth <= 991.98) {
+            createBackdrop();
+            sidebar.classList.add('show');
+            sidebarBackdrop.classList.add('show');
+            content.classList.add('sidebar-open');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('show');
+        if (sidebarBackdrop) {
+            sidebarBackdrop.classList.remove('show');
+        }
+        content.classList.remove('sidebar-open');
+        document.body.style.overflow = '';
+    }
+
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (sidebar.classList.contains('show')) {
+                closeSidebar();
+            } else {
+                showSidebar();
+            }
+        });
+    }
+
+    // Handle window resize to close sidebar on desktop
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 991.98) {
+            closeSidebar();
+        }
+    });
+
+    // Keyboard shortcuts for desktop usage
+    if (window.innerWidth >= 992) {
+        document.addEventListener('keydown', function (e) {
+            // Alt + S to toggle sidebar (desktop only)
+            if (e.altKey && e.key === 's') {
+                e.preventDefault();
+                if (sidebarToggle) {
+                    sidebarToggle.click();
+                }
+            }
+
+            // Escape to close any open overlays
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+
+        // Show keyboard shortcuts hint on Alt key press
+        let keyboardHints = null;
+        document.addEventListener('keydown', function (e) {
+            if (e.altKey && !keyboardHints) {
+                keyboardHints = document.createElement('div');
+                keyboardHints.className = 'keyboard-shortcuts show';
+                keyboardHints.innerHTML = `
+                    <div class="shortcut-item">
+                        <span>Toggle Sidebar</span>
+                        <span class="key">Alt + S</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>Close Overlays</span>
+                        <span class="key">Esc</span>
+                    </div>
+                `;
+                document.body.appendChild(keyboardHints);
+            }
+        });
+
+        document.addEventListener('keyup', function (e) {
+            if (!e.altKey && keyboardHints) {
+                keyboardHints.remove();
+                keyboardHints = null;
+            }
+        });
+    }
 });
