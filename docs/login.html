@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="">
+
+    <title>施設カルテシステム - ログイン</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=noto-sans-jp:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Scripts -->
+    <link rel="preload" as="style" href="./build/assets/app-DqqBUKz6.css" /><link rel="modulepreload" href="./build/assets/app-Bcrk1fxR.js" /><link rel="stylesheet" href="./build/assets/app-DqqBUKz6.css" /><script type="module" src="./build/assets/app-Bcrk1fxR.js"></script></head>
+<body class="login-page" style="background-image: url('./images/marble-background.png');">
+    <!-- Main Content -->
+    <main class="login-content">
+        <div class="login-main-wrapper">
+    <div class="login-form-container">
+        <!-- Logo -->
+        <div class="login-logo">
+            <img src="./images/shise-cal-logo.png" alt="Shise-Cal" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none';">
+        </div>
+        
+        <!-- Login Form -->
+        <div class="login-form">
+            <form method="POST" action="#" onsubmit="return handleLogin(event)">
+                <input type="hidden" name="_token" value="" autocomplete="off">                
+                <!-- Username Field -->
+                <div class="form-group">
+                    <label for="name" class="form-label">UserName</label>
+                    <input type="text" class="form-control " id="name" name="name" 
+                           placeholder="任意のユーザー名を入力" 
+                           value="" required>
+                                    </div>
+                
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control " id="password" name="password" 
+                           placeholder="任意のパスワードを入力" required>
+                                    </div>
+                
+                <!-- Role Selection Field -->
+                
+                <div class="form-group">
+                    <label for="user_type" class="form-label">Role</label>
+                    <select class="form-control " id="user_type" name="user_type" required>
+                        <option value="">役割を選択してください</option>
+                        <option value="system_admin" >システム管理者</option>
+                        <option value="editor" >編集者</option>
+                        <option value="approver" >承認者</option>
+                        <option value="viewer_executive" >閲覧者（役員・本社）</option>
+                        <option value="viewer_department" >閲覧者（部門責任者）</option>
+                        <option value="viewer_district" >閲覧者（地区担当）</option>
+                        <option value="viewer_facility" >閲覧者（事業所）</option>
+                    </select>
+                                    </div>
+                
+                <!-- Login Button -->
+                <button type="submit" class="login-button">
+                    LOGIN
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Instructions Panel -->
+    <div class="login-instructions">
+        <div class="instructions-card">
+            <div class="instructions-header">
+                <i class="bi bi-info-circle me-2"></i>
+                <span>デモ用ログイン</span>
+            </div>
+            <div class="instructions-content">
+                <div class="instruction-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <strong>ユーザー名</strong><br>
+                        <small>任意の文字列を入力してください</small>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        <strong>パスワード</strong><br>
+                        <small>任意の文字列を入力してください</small>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        <strong>役割選択</strong><br>
+                        <small>システム管理者・編集者・承認者・各種閲覧者から選択</small>
+                    </div>
+                </div>
+            </div>
+            <div class="role-descriptions">
+                <div class="role-item">
+                    <span class="role-badge system-admin">システム管理者</span>
+                    <span class="role-desc">全施設・管理機能</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-badge editor">編集者</span>
+                    <span class="role-desc">全施設編集</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-badge approver">承認者</span>
+                    <span class="role-desc">変更承認</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-badge viewer-executive">役員・本社</span>
+                    <span class="role-desc">全施設閲覧・出力</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-badge viewer-department">部門責任者</span>
+                    <span class="role-desc">部門施設のみ</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-badge viewer-district">地区担当</span>
+                    <span class="role-desc">地区施設のみ</span>
+                </div>
+                <div class="role-item">
+                    <span class="role-badge viewer-facility">事業所</span>
+                    <span class="role-desc">自施設のみ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Messages (positioned outside the form container) -->
+
+    </main>
+
+    
+    <script src="./js/static-site.js"></script>
+</body>
+</html>
