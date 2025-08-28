@@ -3,26 +3,42 @@
  * GitHub Pages でのログイン機能とナビゲーション
  */
 
+// グローバルなログイン処理関数
+function handleLogin(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const name = formData.get('name');
+    const role = formData.get('user_type');
+
+    // 入力値の検証
+    if (!name || !role) {
+        alert('ユーザー名と役割を入力してください。');
+        return false;
+    }
+
+    const userData = {
+        name: name,
+        role: role,
+        logged_in_at: new Date().toISOString()
+    };
+
+    // ユーザーデータをローカルストレージに保存
+    localStorage.setItem('shise_cal_user', JSON.stringify(userData));
+
+    // ダッシュボードにリダイレクト
+    window.location.href = './dashboard.html';
+
+    return false;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    // ログインフォームの処理
-    const loginForm = document.querySelector('form[action*="login"]');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(this);
-            const userData = {
-                name: formData.get('name'),
-                role: formData.get('user_type'),
-                logged_in_at: new Date().toISOString()
-            };
-
-            // ユーザーデータをローカルストレージに保存
-            localStorage.setItem('shise_cal_user', JSON.stringify(userData));
-
-            // ダッシュボードにリダイレクト
-            window.location.href = './dashboard.html';
-        });
+    // ログインフォームの処理（フォールバック）
+    const loginForm = document.querySelector('form[action="#"]');
+    if (loginForm && !loginForm.getAttribute('onsubmit')) {
+        loginForm.addEventListener('submit', handleLogin);
     }
 
     // ログアウト処理
