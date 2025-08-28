@@ -1,78 +1,476 @@
-// Custom styles for Facility Management System
+/*
+ * 施設管理システム (Shise-Cal) - カスタムスタイル
+ * 
+ * 【概要】
+ * Figmaデザインに基づいたカスタムCSS
+ * Bootstrap 5をベースにしたレスポンシブデザイン
+ * 
+ * 【主要コンポーネント】
+ * - ヘッダーメニュー（グラデーション背景）
+ * - サイドバーナビゲーション
+ * - ログインページ（マーブル背景）
+ * - ダッシュボード各種セクション
+ * - 通知・承認・コメントセクション
+ * 
+ * 【カラーパレット】
+ * - プライマリ: #00B4E3 (シアン)
+ * - セカンダリ: #F27CA6 (ピンク)
+ * - テキスト: #424242 (グレー)
+ * - 背景: #FFFFFF (ホワイト)
+ * 
+ * 【レスポンシブ対応】
+ * - デスクトップ: 992px以上
+ * - タブレット: 576px-991px
+ * - モバイル: 575px以下
+ */
 
-// Layout
-.main-wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+// Layout Structure
+html,
+body {
+    overflow: hidden;
+    height: 100vh;
 }
 
-.content-wrapper {
+.shise-cal-layout {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #FFFFFF;
+    overflow: hidden;
+}
+
+// Header Menu
+.shise-header {
+    position: fixed;
+    width: 100%;
+    height: 64px;
+    left: 0px;
+    top: 0px;
+    background: linear-gradient(90deg, rgba(0, 180, 227, 0.3) 20%, rgba(242, 124, 166, 0.3) 80%);
+    z-index: 1030;
+
+    .container-fluid {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        position: relative;
+    }
+}
+
+// Logo
+.shise-logo {
+    display: flex;
+    align-items: center;
+
+    .logo-image {
+        width: 156px;
+        height: 55px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .logo-fallback {
+        display: flex;
+        align-items: center;
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+
+            i {
+                font-size: 1.5rem;
+                color: white;
+            }
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+// Approver Section
+.approver-section {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .approver-btn {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 300px;
+        height: 44px;
+        border: 1px solid #000000;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #424242;
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        &:hover {
+            background-color: white;
+            border-color: #000000;
+            color: #424242;
+        }
+
+        &:focus {
+            background-color: white;
+            border-color: #000000;
+            color: #424242;
+            box-shadow: none;
+        }
+    }
+
+    .dropdown-menu {
+        border: 1px solid #000000;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        .dropdown-item {
+            color: #424242;
+            font-size: 14px;
+            padding: 8px 16px;
+
+            &:hover {
+                background-color: #f8f9fa;
+                color: #424242;
+            }
+
+            i {
+                width: 16px;
+            }
+        }
+
+        .dropdown-divider {
+            border-color: #e9ecef;
+        }
+    }
+}
+
+// Main Container
+.shise-main-container {
+    display: flex;
     flex: 1;
-    padding: 2rem 0;
+    padding-top: 64px;
 }
 
 // Sidebar
-.sidebar {
-    min-height: calc(100vh - 56px);
-    background-color: $light;
-    border-right: 1px solid $border-color;
+.shise-sidebar {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 13px 0px 0px;
+    gap: 263px;
+    position: absolute;
+    width: 240px;
+    height: calc(100vh - 64px);
+    left: 0px;
+    top: 64px;
+    border: 1px solid #9E9E9E;
+    filter: drop-shadow(1.80488px 0px 9.92683px rgba(0, 0, 0, 0.15));
+    background: #FFFFFF;
+    z-index: 1020;
+
+    @media (min-width: 992px) {
+        position: fixed;
+    }
 }
 
-.sidebar .nav-link {
-    color: $dark;
-    padding: 0.75rem 1rem;
-    border-radius: 0;
+.shise-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24.51px;
+    width: 240px;
+    height: 522px;
 
-    &:hover {
-        background-color: rgba($primary, 0.1);
-        color: $primary;
+    .nav-item {
+        width: 221px;
+        height: 43.32px;
+        border-radius: 7.21951px;
+        margin-bottom: 0.25rem;
     }
 
-    &.active {
-        background-color: $primary;
-        color: white;
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 10.83px;
+        width: 100%;
+        height: 100%;
+        color: #424242;
+        font-family: 'Hiragino Kaku Gothic ProN';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        text-decoration: none;
+        border-radius: 7.21951px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: #f8f9fa;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        &.active {
+            background-color: #e3f2fd;
+            color: #000000;
+            border-right: 3px solid #0d6efd;
+        }
+
+        i {
+            width: 21.97px;
+            height: 21.66px;
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 21.6585px;
+            line-height: 22px;
+            margin-right: 10.83px;
+        }
+    }
+}
+
+// Main Content
+.shise-content {
+    position: fixed;
+    width: calc(100% - 240px);
+    height: calc(100vh - 64px);
+    left: 240px;
+    top: 64px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 9.02439px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @media (max-width: 991.98px) {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: auto;
+        margin: 1rem;
+        padding: 1rem;
+        overflow: visible;
+    }
+}
+
+// Notification Section
+.notification-section {
+    position: relative;
+    left: 23.49px;
+    right: 32.68px;
+    top: 12.54px;
+    bottom: 543.61px;
+    overflow-y: scroll;
+    border-radius: 9.02439px;
+
+    .notification-title {
+        width: 251.56px;
+        height: 18.05px;
+        font-family: 'Hiragino Kaku Gothic ProN';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13.9878px;
+        line-height: 21px;
+        color: #424242;
+        margin-bottom: 20px;
+    }
+
+    .notification-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 30px;
+
+        .notification-avatar {
+            width: 36.1px;
+            height: 36.1px;
+            background: #CCCCCC;
+            border-radius: 18.0488px;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .notification-content {
+            flex: 1;
+
+            .notification-header {
+                font-family: 'Hiragino Kaku Gothic ProN';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14.439px;
+                line-height: 18px;
+                color: #212121;
+                margin-bottom: 5px;
+            }
+
+            .notification-body {
+                font-family: 'Hiragino Kaku Gothic ProN';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 12.6341px;
+                line-height: 16px;
+                color: #757575;
+            }
+        }
+    }
+
+    .horizontal-divider {
+        height: 0.9px;
+        background: #E0E0E0;
+        margin: 20px 0;
+    }
+}
+
+// Comment Section
+.comment-section {
+    .comment-title {
+        width: 86.81px;
+        height: 17.15px;
+        font-family: 'Hiragino Kaku Gothic ProN';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14.439px;
+        line-height: 22px;
+        color: #424242;
+        margin-bottom: 20px;
+    }
+
+    .comment-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+
+        .comment-badge {
+            width: 27.07px;
+            height: 27.07px;
+            background: #E0E0E0;
+            border-radius: 54.1463px;
+            margin-right: 14px;
+        }
+
+        .comment-text {
+            font-family: 'Hiragino Kaku Gothic ProN';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14.439px;
+            line-height: 22px;
+            color: #424242;
+        }
+    }
+}
+
+// Approval Section
+.approval-section {
+    .approval-title {
+        width: 57.94px;
+        height: 17.15px;
+        font-family: 'Hiragino Kaku Gothic ProN';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14.439px;
+        line-height: 22px;
+        color: #424242;
+        margin-bottom: 20px;
+    }
+
+    .approval-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+
+        .approval-badge {
+            width: 27.07px;
+            height: 27.07px;
+            background: #E0E0E0;
+            border-radius: 54.1463px;
+            margin-right: 14px;
+        }
+
+        .approval-text {
+            font-family: 'Hiragino Kaku Gothic ProN';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14.439px;
+            line-height: 22px;
+            color: #424242;
+            margin-right: 20px;
+        }
+
+        .approval-button {
+            height: 32.49px;
+            background: rgba(159, 217, 246, 0.55);
+            border-radius: 3.60976px;
+            border: none;
+            padding: 7.22px 16.4px;
+
+            .button-icon {
+                width: 18.34px;
+                height: 18.05px;
+                font-family: 'Material Icons';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18.0488px;
+                line-height: 18px;
+                color: #000000;
+                margin-right: 8px;
+            }
+
+            .button-text {
+                font-family: 'Hiragino Kaku Gothic ProN';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 12.6341px;
+                line-height: 19px;
+                letter-spacing: 0.541463px;
+                color: #000000;
+            }
+        }
     }
 }
 
 // Cards
 .card {
-    box-shadow: $box-shadow-sm;
-    border: $card-border-width solid $card-border-color;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    border-radius: 9.02439px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
 
     .card-header {
-        background-color: $light;
-        border-bottom: 1px solid $card-border-color;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
         font-weight: 600;
-    }
-}
-
-// Tables
-.table {
-    th {
-        background-color: $light;
-        border-bottom: 2px solid $border-color;
-        font-weight: 600;
-    }
-}
-
-// Forms
-.form-label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.required::after {
-    content: " *";
-    color: $danger;
-}
-
-// Buttons
-.btn {
-    font-weight: 500;
-
-    &.btn-sm {
-        font-size: 0.8rem;
+        border-radius: 9.02439px 9.02439px 0 0;
     }
 }
 
@@ -80,79 +478,439 @@
 .alert {
     border: none;
     border-left: 4px solid;
+    border-radius: 9.02439px;
 
     &.alert-primary {
-        border-left-color: $primary;
+        border-left-color: #0d6efd;
     }
 
     &.alert-success {
-        border-left-color: $success;
+        border-left-color: #198754;
     }
 
     &.alert-warning {
-        border-left-color: $warning;
+        border-left-color: #ffc107;
     }
 
     &.alert-danger {
-        border-left-color: $danger;
+        border-left-color: #dc3545;
+    }
+
+    &.alert-info {
+        border-left-color: #0dcaf0;
+    }
+
+    &.alert-dismissible {
+        padding-right: 3rem;
     }
 }
 
-// Utilities
-.text-muted {
-    color: $secondary !important;
-}
+// Buttons
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
 
-.border-start {
-    border-left: 1px solid $border-color !important;
-}
-
-// Loading states
-.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-// File upload
-.file-upload-area {
-    border: 2px dashed $border-color;
-    border-radius: $border-radius;
-    padding: 2rem;
-    text-align: center;
-    transition: border-color 0.15s ease-in-out;
-
-    &:hover {
-        border-color: $primary;
-    }
-
-    &.dragover {
-        border-color: $primary;
-        background-color: rgba($primary, 0.05);
+    &.btn-sm {
+        font-size: 0.8rem;
+        padding: 0.375rem 0.75rem;
     }
 }
 
-// Status badges
-.status-badge {
-    &.status-pending {
-        background-color: $warning;
-    }
+// Forms
+.form-control,
+.form-select {
+    border-radius: 6px;
 
-    &.status-approved {
-        background-color: $success;
-    }
-
-    &.status-rejected {
-        background-color: $danger;
+    &:focus {
+        border-color: rgba(13, 110, 253, 0.5);
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
     }
 }
 
 // Responsive adjustments
-@media (max-width: 768px) {
-    .sidebar {
-        min-height: auto;
+@media (max-width: 991.98px) {
+
+    html,
+    body {
+        overflow: auto;
+        height: auto;
     }
 
-    .content-wrapper {
-        padding: 1rem 0;
+    .shise-cal-layout {
+        height: auto;
+        overflow: visible;
+    }
+
+    .shise-main-container {
+        flex-direction: column;
+    }
+
+    .shise-sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    .shise-content {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: auto;
+        margin: 1rem;
+        padding: 1rem;
+        overflow: visible;
+    }
+}
+
+@media (max-width: 576px) {
+    .shise-logo .logo-image {
+        width: 120px;
+        height: 42px;
+    }
+
+    .approver-section .approver-btn {
+        width: 180px;
+        font-size: 18px;
+    }
+
+    .shise-content {
+        padding: 0.75rem;
+    }
+}
+
+/*
+ * ログインページスタイル
+ * 
+ * 【デザイン仕様】
+ * - マーブル背景画像（marble-background.png）
+ * - 中央配置のログインフォーム
+ * - 透明度を使ったモダンなデザイン
+ * - 4つの入力フィールド（ユーザー名、パスワード、役割選択、ログインボタン）
+ * 
+ * 【カラーリング】
+ * - 入力フィールド背景: rgba(0, 180, 227, 0.3) - 半透明シアン
+ * - ボーダー: #00B4E3 - シアン
+ * - ボタン背景: #F27CA6 - ピンク
+ * - テキスト: #000000 - ブラック
+ */
+.login-page {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+
+    .shise-cal-layout {
+        background: transparent;
+        border: none;
+    }
+
+    .shise-header {
+        background: transparent;
+        border: none;
+
+        .container-fluid {
+            justify-content: center;
+        }
+    }
+}
+
+.login-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 64px);
+    padding: 2rem 0;
+    position: relative;
+}
+
+// Login main wrapper for better layout
+.login-main-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    position: relative;
+
+    @media (max-width: 1200px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+        gap: 20px;
+    }
+}
+
+.login-form-container {
+    position: relative;
+    width: 316.66px;
+    height: 280px;
+    z-index: 2;
+
+    .login-logo {
+        position: absolute;
+        width: 156px;
+        height: 55px;
+        left: calc(50% - 156px/2);
+        top: 0px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .login-form {
+        position: absolute;
+        width: 316.66px;
+        height: 164px;
+        left: 0px;
+        top: 55px;
+
+        .form-group {
+            margin-bottom: 20px;
+
+            .form-label {
+                position: relative;
+                width: 74px;
+                height: 12px;
+                font-family: 'Hiragino Kaku Gothic ProN';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 10.5px;
+                line-height: 16px;
+                color: #424242;
+                margin-bottom: 8px;
+                display: block;
+            }
+
+            .form-control {
+                box-sizing: border-box;
+                height: 30.6px;
+                width: 100%;
+                background: rgba(0, 180, 227, 0.3);
+                border: 0.75px solid #00B4E3;
+                border-radius: 3.375px;
+                padding: 8px;
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 14px;
+                color: #000000;
+
+                &::placeholder {
+                    color: rgba(0, 0, 0, 0.5);
+                }
+
+                &:focus {
+                    background: rgba(0, 180, 227, 0.4);
+                    border-color: #00B4E3;
+                    box-shadow: none;
+                    outline: none;
+                }
+
+                // Select specific styles
+                &.form-select,
+                &[multiple] {
+                    cursor: pointer;
+
+                    option {
+                        background: white;
+                        color: #000000;
+                        padding: 8px;
+                    }
+                }
+            }
+        }
+
+        .login-button {
+            height: 29.69px;
+            width: 100%;
+            background: #F27CA6;
+            border: none;
+            border-radius: 3px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 10.5px;
+            line-height: 12px;
+            color: #FFFFFF;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background: #e06b95;
+            }
+
+            &:focus {
+                background: #e06b95;
+                box-shadow: none;
+                outline: none;
+            }
+        }
+    }
+}
+
+// Additional select styling for login form
+.login-form select.form-control {
+    cursor: pointer;
+
+    option {
+        background: white;
+        color: #000000;
+        padding: 8px;
+    }
+}
+
+/*
+ * ログイン説明パネル
+ * 
+ * ログイン画面の使用方法を説明するパネル
+ * フォームの右側または下側に配置
+ */
+.login-instructions {
+    width: 380px;
+    flex-shrink: 0;
+
+    @media (max-width: 1200px) {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    @media (max-width: 768px) {
+        max-width: 350px;
+    }
+}
+
+.instructions-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 180, 227, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+
+    .instructions-header {
+        display: flex;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: #00B4E3;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(0, 180, 227, 0.2);
+    }
+
+    .instructions-content {
+        margin-bottom: 16px;
+
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+
+            .step-number {
+                width: 24px;
+                height: 24px;
+                background: #00B4E3;
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: 600;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+
+            .step-text {
+                font-family: 'Roboto', sans-serif;
+
+                strong {
+                    font-size: 14px;
+                    color: #424242;
+                    font-weight: 600;
+                }
+
+                small {
+                    font-size: 12px;
+                    color: #757575;
+                    line-height: 1.3;
+                }
+            }
+        }
+    }
+
+    .role-descriptions {
+        .role-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 180, 227, 0.2);
+
+            .role-badge {
+                font-size: 12px;
+                font-weight: 600;
+                padding: 4px 10px;
+                border-radius: 14px;
+                color: white;
+                min-width: 90px;
+                text-align: center;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+                &.system-admin {
+                    background: linear-gradient(135deg, #dc3545, #b02a37);
+                }
+
+                &.editor {
+                    background: linear-gradient(135deg, #fd7e14, #e8690b);
+                }
+
+                &.approver {
+                    background: linear-gradient(135deg, #198754, #146c43);
+                }
+
+                &.viewer-executive {
+                    background: linear-gradient(135deg, #6f42c1, #5a359a);
+                }
+
+                &.viewer-department {
+                    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+                }
+
+                &.viewer-district {
+                    background: linear-gradient(135deg, #20c997, #1aa179);
+                }
+
+                &.viewer-facility {
+                    background: linear-gradient(135deg, #6c757d, #5a6268);
+                }
+            }
+
+            .role-desc {
+                font-size: 12px;
+                color: #212529;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+// Hide elements for login page
+.login-page {
+
+    .shise-sidebar,
+    .approver-section {
+        display: none;
+    }
+
+    .shise-main-container {
+        padding-top: 0;
     }
 }
