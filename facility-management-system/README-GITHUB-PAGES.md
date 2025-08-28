@@ -66,7 +66,10 @@ php artisan site:generate --output=../docs
 2. 左サイドバーの「Pages」をクリック
 3. 「Source」で「Deploy from a branch」を選択
 4. 「Branch」で「gh-pages」を選択
-5. 「Save」をクリック
+5. 「Folder」で「/ (root)」を選択
+6. 「Save」をクリック
+
+**重要**: GitHub Pagesは `https://[username].github.io/[repository-name]/` でアクセス可能になります。
 
 ## 📁 ファイル構成
 
