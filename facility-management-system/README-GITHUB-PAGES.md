@@ -5,7 +5,7 @@
 ## 🌐 デモサイト
 
 GitHub Pagesで公開されたデモサイトにアクセスできます：
-- **URL**: `https://[your-username].github.io/[repository-name]/`
+- **URL**: `https://izumi-yuya.github.io/sicecal/`
 
 ## 📋 使用方法
 

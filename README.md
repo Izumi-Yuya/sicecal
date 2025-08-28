@@ -5,7 +5,14 @@
 ## 🌐 デモサイト
 
 GitHub Pagesで公開されたデモサイトにアクセスできます：
-- **URL**: https://[your-username].github.io/[repository-name]/
+- **URL**: https://izumi-yuya.github.io/sicecal/
+
+### GitHub Pages設定手順
+1. GitHubリポジトリの「Settings」→「Pages」
+2. Source: "Deploy from a branch"
+3. Branch: "main" (または "master")
+4. Folder: "/docs"
+5. Save
 
 ## 📋 機能概要
 

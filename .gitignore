@@ -1,10 +1,11 @@
-# Generated static files for GitHub Pages
-/*.html
-/build/
-/css/
-/js/
-/images/
-/favicon.ico
+# Generated static files for GitHub Pages (keep docs/README.md and docs/index.html)
+docs/*.html
+!docs/index.html
+docs/build/
+docs/css/
+docs/js/
+docs/images/
+docs/favicon.ico
 
 # Laravel specific (in facility-management-system/)
 facility-management-system/.env

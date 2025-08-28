@@ -8,18 +8,16 @@ use Illuminate\Support\Facades\View;
 
 class GenerateStaticSite extends Command
 {
-    protected $signature = 'site:generate {--output=docs}';
+    protected $signature = 'site:generate {--output=../docs}';
     protected $description = 'Generate static HTML files for GitHub Pages';
 
     public function handle()
     {
         $outputDir = $this->option('output');
         
-        // Handle special 'root' option for repository root
-        if ($outputDir === 'root') {
-            $outputDir = base_path('../');
-        } elseif (!str_starts_with($outputDir, '/')) {
-            $outputDir = base_path('../' . $outputDir);
+        // Resolve output directory path
+        if (!str_starts_with($outputDir, '/')) {
+            $outputDir = base_path($outputDir);
         }
         
         // Create output directory if it doesn't exist
@@ -35,6 +33,13 @@ class GenerateStaticSite extends Command
         $this->generatePages($outputDir);
 
         $this->info("Static site generated in {$outputDir}");
+        $this->info("Files created:");
+        $files = File::allFiles($outputDir);
+        foreach ($files as $file) {
+            if (str_ends_with($file->getFilename(), '.html')) {
+                $this->line("  - " . $file->getRelativePathname());
+            }
+        }
     }
 
     private function generatePages($outputDir)

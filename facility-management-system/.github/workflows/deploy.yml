@@ -52,27 +52,15 @@ jobs:
         php artisan route:cache
         php artisan view:cache
 
-    - name: Create static site structure
+    - name: Create docs directory
+      run: |
+        mkdir -p docs
+        echo "# GitHub Pages Site" > docs/README.md
+
+    - name: Copy public assets
       working-directory: facility-management-system
       run: |
-        # Copy public assets to root
-        cp -r public/* ../
-        
-        # Create index.html that redirects to login
-        cat > ../index.html << 'EOF'
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8">
-            <title>Shise-Cal - 施設管理システム</title>
-            <meta http-equiv="refresh" content="0; url=./login.html">
-            <link rel="canonical" href="./login.html">
-        </head>
-        <body>
-            <p>Redirecting to <a href="./login.html">login page</a>...</p>
-        </body>
-        </html>
-        EOF
+        cp -r public/* ../docs/
 
     - name: Generate static HTML pages
       working-directory: facility-management-system
@@ -80,7 +68,8 @@ jobs:
         # Generate login page
         php artisan tinker --execute="
         \$content = view('auth.login')->render();
-        file_put_contents('../login.html', \$content);
+        file_put_contents('../docs/login.html', \$content);
+        echo 'Login page generated';
         "
         
         # Generate dashboard page (with mock session data)
@@ -92,14 +81,47 @@ jobs:
             'logged_in_at' => now()
         ]]);
         \$content = view('dashboard')->render();
-        file_put_contents('../dashboard.html', \$content);
+        file_put_contents('../docs/dashboard.html', \$content);
+        echo 'Dashboard page generated';
         "
+        
+        # Create index.html that redirects to login
+        cat > ../docs/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="ja">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Shise-Cal - 施設管理システム</title>
+            <meta http-equiv="refresh" content="0; url=./login.html">
+            <link rel="canonical" href="./login.html">
+            <style>
+                body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+                .loading { font-size: 18px; color: #666; }
+                a { color: #007bff; text-decoration: none; }
+                a:hover { text-decoration: underline; }
+            </style>
+        </head>
+        <body>
+            <div class="loading">
+                <h1>Shise-Cal 施設管理システム</h1>
+                <p>ログインページにリダイレクトしています...</p>
+                <p><a href="./login.html">こちらをクリックしてログインページへ</a></p>
+            </div>
+        </body>
+        </html>
+        EOF
+
+    - name: List generated files
+      run: |
+        echo "Generated files in docs:"
+        ls -la docs/
+        echo "HTML files:"
+        find docs/ -name "*.html" -exec echo {} \;
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
-        publish_branch: gh-pages
-        exclude_assets: 'facility-management-system/**'
+        publish_dir: ./docs
