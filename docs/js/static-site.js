@@ -5,6 +5,7 @@
 
 // グローバルなログイン処理関数
 function handleLogin(event) {
+    console.log('handleLogin called');
     event.preventDefault();
 
     const form = event.target;
@@ -12,6 +13,8 @@ function handleLogin(event) {
 
     const name = formData.get('name');
     const role = formData.get('user_type');
+
+    console.log('Form data:', { name, role });
 
     // 入力値の検証
     if (!name || !role) {
@@ -25,8 +28,12 @@ function handleLogin(event) {
         logged_in_at: new Date().toISOString()
     };
 
+    console.log('Saving user data:', userData);
+
     // ユーザーデータをローカルストレージに保存
     localStorage.setItem('shise_cal_user', JSON.stringify(userData));
+
+    console.log('Redirecting to dashboard...');
 
     // ダッシュボードにリダイレクト
     window.location.href = './dashboard.html';
@@ -34,12 +41,32 @@ function handleLogin(event) {
     return false;
 }
 
+// より確実なイベントリスナー設定
+window.handleLogin = handleLogin;
+
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM loaded');
+
     // ログインフォームの処理（フォールバック）
     const loginForm = document.querySelector('form[action="#"]');
-    if (loginForm && !loginForm.getAttribute('onsubmit')) {
-        loginForm.addEventListener('submit', handleLogin);
+    console.log('Login form found:', loginForm);
+
+    if (loginForm) {
+        // onsubmit属性がある場合でも、追加でイベントリスナーを設定
+        loginForm.addEventListener('submit', function (e) {
+            console.log('Form submit event triggered');
+            return handleLogin(e);
+        });
     }
+
+    // すべてのフォームに対してもリスナーを設定
+    const allForms = document.querySelectorAll('form');
+    allForms.forEach(form => {
+        if (form.querySelector('input[name="name"]') && form.querySelector('select[name="user_type"]')) {
+            console.log('Adding listener to login form');
+            form.addEventListener('submit', handleLogin);
+        }
+    });
 
     // ログアウト処理
     const logoutButtons = document.querySelectorAll('button[type="submit"]');
