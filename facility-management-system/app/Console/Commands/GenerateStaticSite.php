@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ViewErrorBag;
 
 class GenerateStaticSite extends Command
 {
@@ -46,7 +47,11 @@ class GenerateStaticSite extends Command
     {
         // Generate login page
         $this->info('Generating login page...');
-        $loginContent = View::make('auth.login')->render();
+        
+        // Create a mock errors bag for the login view
+        $errors = new \Illuminate\Support\ViewErrorBag();
+        
+        $loginContent = View::make('auth.login', compact('errors'))->render();
         File::put("{$outputDir}/login.html", $loginContent);
 
         // Generate dashboard with mock data
@@ -62,20 +67,34 @@ class GenerateStaticSite extends Command
         $dashboardContent = View::make('dashboard')->render();
         File::put("{$outputDir}/dashboard.html", $dashboardContent);
 
-        // Generate index.html redirect
-        $this->info('Generating index page...');
-        $indexContent = '<!DOCTYPE html>
-<html>
+        // Don't overwrite the existing index.html if it exists and is not empty
+        $indexPath = "{$outputDir}/index.html";
+        if (!File::exists($indexPath) || File::size($indexPath) < 100) {
+            $this->info('Generating index page...');
+            $indexContent = '<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shise-Cal - 施設管理システム</title>
     <meta http-equiv="refresh" content="0; url=./login.html">
     <link rel="canonical" href="./login.html">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .loading { font-size: 18px; color: #666; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-    <p>Redirecting to <a href="./login.html">login page</a>...</p>
+    <div class="loading">
+        <h1>Shise-Cal 施設管理システム</h1>
+        <p>ログインページにリダイレクトしています...</p>
+        <p><a href="./login.html">こちらをクリックしてログインページへ</a></p>
+    </div>
 </body>
 </html>';
-        File::put("{$outputDir}/index.html", $indexContent);
+            File::put($indexPath, $indexContent);
+        }
     }
 }

@@ -67,7 +67,8 @@ jobs:
       run: |
         # Generate login page
         php artisan tinker --execute="
-        \$content = view('auth.login')->render();
+        \$errors = new \Illuminate\Support\ViewErrorBag();
+        \$content = view('auth.login', compact('errors'))->render();
         file_put_contents('../docs/login.html', \$content);
         echo 'Login page generated';
         "
