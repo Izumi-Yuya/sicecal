@@ -52,6 +52,7 @@ class GenerateStaticSite extends Command
         $errors = new \Illuminate\Support\ViewErrorBag();
         
         $loginContent = View::make('auth.login', compact('errors'))->render();
+        $loginContent = $this->fixStaticPaths($loginContent);
         File::put("{$outputDir}/login.html", $loginContent);
 
         // Generate dashboard with mock data
@@ -65,6 +66,7 @@ class GenerateStaticSite extends Command
             ]
         ]);
         $dashboardContent = View::make('dashboard')->render();
+        $dashboardContent = $this->fixStaticPaths($dashboardContent);
         File::put("{$outputDir}/dashboard.html", $dashboardContent);
 
         // Don't overwrite the existing index.html if it exists and is not empty
@@ -96,5 +98,27 @@ class GenerateStaticSite extends Command
 </html>';
             File::put($indexPath, $indexContent);
         }
+    }
+
+    private function fixStaticPaths($content)
+    {
+        // Fix asset paths for GitHub Pages
+        $content = preg_replace('/http:\/\/localhost\/build\/assets\//', './build/assets/', $content);
+        
+        // Fix image paths
+        $content = preg_replace('/http:\/\/localhost\/images\//', './images/', $content);
+        
+        // Fix form actions to use JavaScript
+        $content = preg_replace('/action="http:\/\/localhost\/login"/', 'action="#" onsubmit="return handleLogin(event)"', $content);
+        
+        // Add JavaScript for login handling if form exists
+        if (strpos($content, 'handleLogin') !== false) {
+            $jsScript = '
+    <script src="./js/static-site.js"></script>
+</body>';
+            $content = str_replace('</body>', $jsScript, $content);
+        }
+        
+        return $content;
     }
 }

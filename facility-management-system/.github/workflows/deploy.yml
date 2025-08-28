@@ -65,26 +65,8 @@ jobs:
     - name: Generate static HTML pages
       working-directory: facility-management-system
       run: |
-        # Generate login page
-        php artisan tinker --execute="
-        \$errors = new \Illuminate\Support\ViewErrorBag();
-        \$content = view('auth.login', compact('errors'))->render();
-        file_put_contents('../docs/login.html', \$content);
-        echo 'Login page generated';
-        "
-        
-        # Generate dashboard page (with mock session data)
-        php artisan tinker --execute="
-        session(['user' => [
-            'name' => 'デモユーザー',
-            'role' => 'system_admin',
-            'role_display' => 'システム管理者',
-            'logged_in_at' => now()
-        ]]);
-        \$content = view('dashboard')->render();
-        file_put_contents('../docs/dashboard.html', \$content);
-        echo 'Dashboard page generated';
-        "
+        # Use the custom artisan command to generate static pages
+        php artisan site:generate --output=../docs
         
         # Create index.html that redirects to login
         cat > ../docs/index.html << 'EOF'
