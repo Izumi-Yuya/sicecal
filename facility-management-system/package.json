@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "build:static": "vite build && php artisan site:generate"
+        "build:static": "vite build && php artisan site:generate --output=root"
     },
     "devDependencies": {
         "axios": "^1.6.4",

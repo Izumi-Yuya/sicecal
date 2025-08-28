@@ -55,11 +55,11 @@ jobs:
     - name: Create static site structure
       working-directory: facility-management-system
       run: |
-        mkdir -p ../docs
-        cp -r public/* ../docs/
+        # Copy public assets to root
+        cp -r public/* ../
         
         # Create index.html that redirects to login
-        cat > ../docs/index.html << 'EOF'
+        cat > ../index.html << 'EOF'
         <!DOCTYPE html>
         <html>
         <head>
@@ -80,7 +80,7 @@ jobs:
         # Generate login page
         php artisan tinker --execute="
         \$content = view('auth.login')->render();
-        file_put_contents('../docs/login.html', \$content);
+        file_put_contents('../login.html', \$content);
         "
         
         # Generate dashboard page (with mock session data)
@@ -92,7 +92,7 @@ jobs:
             'logged_in_at' => now()
         ]]);
         \$content = view('dashboard')->render();
-        file_put_contents('../docs/dashboard.html', \$content);
+        file_put_contents('../dashboard.html', \$content);
         "
 
     - name: Deploy to GitHub Pages
@@ -100,5 +100,6 @@ jobs:
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_dir: ./
         publish_branch: gh-pages
+        exclude_assets: 'facility-management-system/**'

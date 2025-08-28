@@ -15,6 +15,11 @@ class GenerateStaticSite extends Command
     {
         $outputDir = $this->option('output');
         
+        // If output is relative, make it relative to project root
+        if (!str_starts_with($outputDir, '/')) {
+            $outputDir = base_path('../' . $outputDir);
+        }
+        
         // Create output directory
         if (!File::exists($outputDir)) {
             File::makeDirectory($outputDir, 0755, true);
