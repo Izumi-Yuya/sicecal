@@ -1,0 +1,54 @@
+/*
+ * Design Tokens - Borders
+ * 
+ * Border radius, width, and style definitions
+ * Used for consistent corner styling and borders
+ */
+
+// Border Radius Scale
+$border-radius-none: 0;
+$border-radius-xs: 2px;
+$border-radius-sm: 4px;
+$border-radius-base: 6px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+$border-radius-2xl: 24px;
+$border-radius-full: 50%;
+
+// Border Widths
+$border-width-0: 0;
+$border-width-1: 1px;
+$border-width-2: 2px;
+$border-width-4: 4px;
+$border-width-8: 8px;
+
+// Component Specific Border Radius
+$button-border-radius: $border-radius-base; // 6px
+$input-border-radius: $border-radius-base; // 6px
+$card-border-radius: $border-radius-lg; // 12px
+$modal-border-radius: $border-radius-md; // 8px
+$badge-border-radius: $border-radius-full; // 50%
+$alert-border-radius: $border-radius-md; // 8px
+
+// Border Radius Map for Utility Generation
+$border-radiuses: (
+    'none': $border-radius-none,
+    'xs': $border-radius-xs,
+    'sm': $border-radius-sm,
+    'base': $border-radius-base,
+    'md': $border-radius-md,
+    'lg': $border-radius-lg,
+    'xl': $border-radius-xl,
+    '2xl': $border-radius-2xl,
+    'full': $border-radius-full
+);
+
+// Border Width Map
+$border-widths: (
+    0: $border-width-0,
+    1: $border-width-1,
+    2: $border-width-2,
+    4: $border-width-4,
+    8: $border-width-8
+);

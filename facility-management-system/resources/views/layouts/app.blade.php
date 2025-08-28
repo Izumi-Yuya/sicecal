@@ -112,24 +112,5 @@
     </div>
 
     @stack('scripts')
-    
-    <!-- Bootstrap JavaScript for dropdown functionality -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Bootstrap dropdowns
-            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
-            var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-                return new bootstrap.Dropdown(dropdownToggleEl);
-            });
-            
-            // Handle logout form submission
-            const logoutForm = document.getElementById('logout-form');
-            if (logoutForm) {
-                logoutForm.addEventListener('submit', function(e) {
-                    console.log('Logout form submitted');
-                });
-            }
-        });
-    </script>
 </body>
 </html>

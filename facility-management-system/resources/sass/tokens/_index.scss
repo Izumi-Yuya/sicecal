@@ -1,0 +1,37 @@
+/*
+ * Design Tokens - Index
+ * 
+ * Central export file for all design tokens
+ * This file can be imported to access all design tokens
+ */
+
+// Import all token files
+@import 'colors';
+@import 'typography';
+@import 'spacing';
+@import 'shadows';
+@import 'borders';
+
+// Export token maps for JavaScript usage (if needed)
+:export {
+    // Colors
+    primary: $primary;
+    secondary: $secondary;
+    success: $success;
+    warning: $warning;
+    danger: $danger;
+    info: $info;
+
+    // Spacing
+    spacing-1: $spacing-1;
+    spacing-2: $spacing-2;
+    spacing-3: $spacing-3;
+    spacing-4: $spacing-4;
+    spacing-5: $spacing-5;
+    spacing-6: $spacing-6;
+
+    // Border radius
+    border-radius-sm: $border-radius-sm;
+    border-radius-base: $border-radius-base;
+    border-radius-lg: $border-radius-lg;
+}

@@ -25,7 +25,7 @@
                 <!-- システム管理者メニュー -->
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('facilities') ? 'active' : '' }}" href="#">
+                        <a class="nav-link {{ request()->is('facilities*') ? 'active' : '' }}" href="{{ route('facilities.index') }}">
                             <i class="bi bi-list-ul me-2"></i>施設一覧
                         </a>
                     </li>
@@ -44,7 +44,7 @@
                 <!-- 編集者メニュー -->
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('facilities') ? 'active' : '' }}" href="#">
+                        <a class="nav-link {{ request()->is('facilities*') ? 'active' : '' }}" href="{{ route('facilities.index') }}">
                             <i class="bi bi-list-ul me-2"></i>施設一覧
                         </a>
                     </li>
@@ -58,7 +58,7 @@
                 <!-- 承認者メニュー -->
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('facilities') ? 'active' : '' }}" href="#">
+                        <a class="nav-link {{ request()->is('facilities*') ? 'active' : '' }}" href="{{ route('facilities.index') }}">
                             <i class="bi bi-list-ul me-2"></i>施設一覧
                         </a>
                     </li>
@@ -86,7 +86,7 @@
                 <!-- その他の閲覧者メニュー -->
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('facilities') ? 'active' : '' }}" href="#">
+                        <a class="nav-link {{ request()->is('facilities*') ? 'active' : '' }}" href="{{ route('facilities.index') }}">
                             <i class="bi bi-list-ul me-2"></i>施設一覧
                         </a>
                     </li>

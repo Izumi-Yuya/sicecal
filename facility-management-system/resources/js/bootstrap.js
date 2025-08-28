@@ -12,7 +12,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Bootstrap 5 JavaScript components
  */
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

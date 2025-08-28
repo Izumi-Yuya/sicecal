@@ -30,6 +30,111 @@
 - **ロールベース認証**: Laravel Gates/Policies
 - **ファイルアクセス**: 署名付きURL（S3）
 
+## ユーザーインターフェース設計
+
+### 施設詳細画面の構造
+
+施設詳細画面は入力項目一覧に基づき、大分類をタブ、分類をドロップダウンで整理します：
+
+#### タブ構成（大分類）
+1. **基本情報** - 施設の基本的な情報
+2. **土地** - 土地の詳細情報
+3. **建物** - 建物の詳細情報  
+4. **ライフライン・設備** - 電気、ガス、水道、通信、エレベーター、空調機
+5. **防犯・防災** - 防犯カメラ、電子錠、消防・防災
+6. **契約書** - 各種契約書類の管理
+7. **図面** - 建築図面類の管理
+8. **大規模修繕履歴** - 修繕・改修工事の履歴
+9. **ドキュメント** - その他の書類管理
+
+#### 各タブ内のドロップダウン構成
+
+**1. 基本情報タブ**
+- 基本 (ドロップダウンなし - 全項目表示)
+
+**2. 土地タブ**  
+- 土地 (ドロップダウンなし - 全項目表示)
+
+**3. 建物タブ**
+- 建物 (ドロップダウンなし - 全項目表示)
+
+**4. ライフライン・設備タブ**
+- 電気 (ドロップダウン)
+- ガス (ドロップダウン) 
+- 水道 (ドロップダウン)
+- 通信 (ドロップダウン)
+- エレベーター (ドロップダウン)
+- 空調機 (ドロップダウン)
+
+**5. 防犯・防災タブ**
+- 防犯カメラ (ドロップダウン)
+- 電子錠 (ドロップダウン)
+- 消防・防災 (ドロップダウン)
+
+**6. 契約書タブ**
+- 厨房委託 (ドロップダウン)
+- 賃貸（休憩室） (ドロップダウン)
+- 賃貸（倉庫） (ドロップダウン)
+- 賃貸（駐車場） (ドロップダウン)
+- カラオケ機器 (ドロップダウン)
+- 定期清掃 (ドロップダウン)
+- 害虫駆除 (ドロップダウン)
+- リネン (ドロップダウン)
+- クリーニング (ドロップダウン)
+- 洗濯委託契約 (ドロップダウン)
+- マットレンタル (ドロップダウン)
+- 理美容 (ドロップダウン)
+- 自動販売機 (ドロップダウン)
+- コーヒー (ドロップダウン)
+- 観葉植物 (ドロップダウン)
+- 除排雪 (ドロップダウン)
+- 産業廃棄物処理 (ドロップダウン)
+- グリストラップ (ドロップダウン)
+- その他契約書 (ドロップダウン)
+
+**7. 図面タブ**
+- 図面関係 (ドロップダウンなし - 全項目表示)
+
+**8. 大規模修繕履歴タブ**
+- 外壁（防水） (ドロップダウン)
+- 外壁（塗装） (ドロップダウン)
+- 内装リニューアル (ドロップダウン)
+- 躯体修繕 (ドロップダウン)
+- 内装修繕 (ドロップダウン)
+- 修繕関連ドキュメント (ドロップダウン)
+
+**9. ドキュメントタブ**
+- その他ドキュメント (ドロップダウンなし - 全項目表示)
+
+### フォーム入力仕様
+
+#### 入力形式の統一
+- **日付**: YYYY/MM/DD形式、表示は「2000年12月12日」
+- **郵便番号**: ハイフンあり形式（123-4567）
+- **電話番号**: ハイフンあり形式（03-1234-5678）
+- **金額**: カンマ区切り表示（1,000,000円）
+- **面積**: 小数点2桁まで表示（290.00㎡）
+
+#### 自動計算機能
+- 開設年数（開設日から自動計算）
+- 築年数（竣工日から自動計算）
+- 契約年数（契約期間から自動計算）
+- 坪単価（価格÷面積で自動計算）
+- 稼働率（実利用者数÷定員で自動計算）
+
+#### 入力例表示
+- 郵便番号: 例）123-4567
+- 電話番号: 例）03-1234-5678
+- FAX番号: 例）03-1234-5679
+- フリーダイヤル: 例）0120-123-456
+- メールアドレス: 例）info@example.com
+- URL: 例）https://www.example.com
+- 住所: 例）千葉県千葉市花見川区畑町455-5
+- 建物名: 例）ハイネス高橋202号室
+- 面積: 例）290.00
+- 金額: 例）1,000,000
+- 日付: 例）2000年12月12日
+
 ## コンポーネントと インターフェース
 
 ### 1. 認証・認可システム
@@ -67,19 +172,58 @@ class Role extends Model
 class Facility extends Model
 {
     protected $fillable = [
-        'facility_code', 'name', 'prefecture', 'city', 'postal_code', 'address',
-        'phone_number', 'fax_number', 'opening_date', 'business_type', 'capacity',
-        'floor_area', 'building_structure', 'construction_year', 'land_ownership',
-        'building_ownership', 'lease_start_date', 'lease_end_date', 'lease_monthly_rent',
-        'management_company', 'fire_insurance_company', 'fire_insurance_start_date',
-        'fire_insurance_end_date', 'earthquake_insurance_company', 'earthquake_insurance_start_date',
-        'earthquake_insurance_end_date', 'department_id', 'region_id', 'status'
+        // 基本情報
+        'company_name', 'facility_code', 'designation_number', 'name', 
+        'postal_code', 'address', 'building_name', 'phone_number', 'fax_number', 
+        'free_dial', 'email', 'url', 'opening_date', 'building_structure', 
+        'building_floors', 'room_count_paid', 'internal_ss_count', 'capacity', 
+        'service_types', 'designation_renewal_date',
+        
+        // 土地情報
+        'land_ownership', 'site_parking_spaces', 'site_area_sqm', 'site_area_tsubo',
+        'land_purchase_price', 'land_rent', 'land_contract_start_date', 'land_contract_end_date',
+        'land_auto_renewal', 'land_management_company', 'land_management_postal_code',
+        'land_management_address', 'land_management_building_name', 'land_management_phone',
+        'land_management_fax', 'land_management_email', 'land_management_url', 'land_management_notes',
+        'land_owner_name', 'land_owner_postal_code', 'land_owner_address', 'land_owner_building_name',
+        'land_owner_phone', 'land_owner_fax', 'land_owner_email', 'land_owner_url', 'land_owner_notes',
+        
+        // 建物情報  
+        'building_ownership', 'building_area_sqm', 'building_area_tsubo', 'floor_area_sqm', 
+        'floor_area_tsubo', 'building_main_price', 'building_cooperation_fund', 'building_rent_monthly',
+        'building_contract_start_date', 'building_contract_end_date', 'building_auto_renewal',
+        'building_management_company', 'building_management_postal_code', 'building_management_address',
+        'building_management_building_name', 'building_management_phone', 'building_management_fax',
+        'building_management_email', 'building_management_url', 'building_management_notes',
+        'building_owner_name', 'building_owner_postal_code', 'building_owner_address', 
+        'building_owner_building_name', 'building_owner_phone', 'building_owner_fax',
+        'building_owner_email', 'building_owner_url', 'building_owner_notes',
+        'construction_company', 'construction_company_phone', 'construction_company_notes',
+        'completion_date', 'useful_life', 'building_inspection_type', 'building_inspection_date',
+        'building_inspection_notes',
+        
+        // 部門・地区
+        'department_id', 'region_id', 'status'
     ];
     
     protected $dates = [
-        'opening_date', 'lease_start_date', 'lease_end_date',
-        'fire_insurance_start_date', 'fire_insurance_end_date',
-        'earthquake_insurance_start_date', 'earthquake_insurance_end_date'
+        'opening_date', 'designation_renewal_date', 'land_contract_start_date', 'land_contract_end_date',
+        'building_contract_start_date', 'building_contract_end_date', 'completion_date', 'building_inspection_date'
+    ];
+    
+    protected $casts = [
+        'service_types' => 'array',
+        'site_area_sqm' => 'decimal:2',
+        'site_area_tsubo' => 'decimal:2', 
+        'building_area_sqm' => 'decimal:2',
+        'building_area_tsubo' => 'decimal:2',
+        'floor_area_sqm' => 'decimal:2',
+        'floor_area_tsubo' => 'decimal:2',
+        'land_purchase_price' => 'integer',
+        'land_rent' => 'integer',
+        'building_main_price' => 'integer',
+        'building_cooperation_fund' => 'integer',
+        'building_rent_monthly' => 'integer'
     ];
     
     public function department(): BelongsTo
@@ -89,6 +233,53 @@ class Facility extends Model
     public function approvals(): HasMany
     public function comments(): HasMany
     public function annualVerifications(): HasMany
+    public function contractAlerts(): HasMany
+    public function equipmentRecords(): HasMany
+    public function contractRecords(): HasMany
+    
+    // 自動計算メソッド
+    public function getOperatingYearsAttribute()
+    {
+        if (!$this->opening_date) return null;
+        return $this->opening_date->diffForHumans(now(), true);
+    }
+    
+    public function getBuildingAgeAttribute() 
+    {
+        if (!$this->completion_date) return null;
+        return $this->completion_date->diffForHumans(now(), true);
+    }
+    
+    public function getLandUnitPriceAttribute()
+    {
+        if (!$this->land_purchase_price || !$this->site_area_tsubo) return null;
+        return $this->land_purchase_price / $this->site_area_tsubo;
+    }
+    
+    public function getBuildingUnitPriceAttribute()
+    {
+        if (!$this->building_main_price || !$this->floor_area_tsubo) return null;
+        return $this->building_main_price / $this->floor_area_tsubo;
+    }
+    
+    // Input examples for form placeholders
+    public static function inputExamples()
+    {
+        return [
+            'name' => '例）○○介護センター',
+            'postal_code' => '例）123-4567',
+            'phone_number' => '例）03-1234-5678',
+            'fax_number' => '例）03-1234-5679',
+            'free_dial' => '例）0120-123-456',
+            'email' => '例）info@example.com',
+            'url' => '例）https://www.example.com',
+            'address' => '例）千葉県千葉市花見川区畑町455-5',
+            'building_name' => '例）ハイネス高橋202号室',
+            'site_area_sqm' => '例）290.00',
+            'land_purchase_price' => '例）10,000,000',
+            'opening_date' => '例）2000年12月12日'
+        ];
+    }
 }
 ```
 
@@ -179,36 +370,95 @@ class AnnualVerification extends Model
 - facility_id (FK) - 施設ID（事業所ユーザー用）
 - created_at, updated_at
 
-**facilities テーブル** (元仕様書の入力項目に基づく)
+**facilities テーブル** (入力項目一覧に基づく詳細設計)
 - id (PK)
-- facility_code (unique) - 事業所コード
-- name (unique) - 施設名
-- prefecture - 都道府県
-- city - 市区町村
-- postal_code - 郵便番号（7桁、ハイフンなし）
-- address - 住所
-- phone_number - 電話番号
-- fax_number - FAX番号
-- opening_date - 開設年月日
-- business_type - 事業種別
-- capacity - 定員
-- floor_area - 延床面積
-- building_structure - 建物構造
-- construction_year - 建築年
-- land_ownership - 土地所有区分
-- building_ownership - 建物所有区分
-- lease_start_date - 賃貸借契約開始日
-- lease_end_date - 賃貸借契約終了日
-- lease_monthly_rent - 月額賃料
-- management_company - 管理会社
-- fire_insurance_company - 火災保険会社
-- fire_insurance_start_date - 火災保険開始日
-- fire_insurance_end_date - 火災保険終了日
-- earthquake_insurance_company - 地震保険会社
-- earthquake_insurance_start_date - 地震保険開始日
-- earthquake_insurance_end_date - 地震保険終了日
+- 基本情報
+  - company_name - 会社名
+  - facility_code - 事業所コード
+  - designation_number - 指定番号
+  - name - 施設名 (required, unique)
+  - postal_code - 郵便番号（ハイフンあり）
+  - address - 住所
+  - building_name - 住所（建物名）
+  - phone_number - 電話番号
+  - fax_number - FAX番号
+  - free_dial - フリーダイヤル
+  - email - メールアドレス
+  - url - URL
+  - opening_date - 開設日
+  - building_structure - 建物構造
+  - building_floors - 建物階数
+  - room_count_paid - 居室数（有料）
+  - internal_ss_count - 内SS数
+  - capacity - 定員数
+  - service_types (JSON) - サービスの種類
+  - designation_renewal_date - 指定更新日
+- 土地情報
+  - land_ownership - 土地所有区分
+  - site_parking_spaces - 敷地内駐車場台数
+  - site_area_sqm - 敷地面積(㎡)
+  - site_area_tsubo - 敷地面積(坪数)
+  - land_purchase_price - 土地購入金額
+  - land_rent - 土地家賃
+  - land_contract_start_date - 土地契約開始日
+  - land_contract_end_date - 土地契約終了日
+  - land_auto_renewal - 土地自動更新の有無
+  - land_management_* - 土地管理会社情報（会社名、住所、連絡先等）
+  - land_owner_* - 土地オーナー情報（氏名、住所、連絡先等）
+- 建物情報
+  - building_ownership - 建物所有区分
+  - building_area_sqm - 建築面積（㎡）
+  - building_area_tsubo - 建築面積（坪数）
+  - floor_area_sqm - 延床面積（㎡）
+  - floor_area_tsubo - 延床面積（坪数）
+  - building_main_price - 本体価格（建築費用）
+  - building_cooperation_fund - 建設協力金
+  - building_rent_monthly - 建物家賃（月）
+  - building_contract_start_date - 建物契約開始日
+  - building_contract_end_date - 建物契約終了日
+  - building_auto_renewal - 建物自動更新の有無
+  - building_management_* - 建物管理会社情報
+  - building_owner_* - 建物オーナー情報
+  - construction_company - 施工会社（会社名）
+  - construction_company_phone - 施工会社（電話番号）
+  - construction_company_notes - 施工会社備考欄
+  - completion_date - 竣工日
+  - useful_life - 耐用年数
+  - building_inspection_type - 特定建築物定期調査（自社or他社）
+  - building_inspection_date - 特定建築物定期調査（実施日）
+  - building_inspection_notes - 特定建築物定期調査（備考）
 - department_id (FK) - 所管部門
 - region_id (FK) - 地区
+- status - ステータス
+- created_at, updated_at
+
+**equipment_records テーブル** (設備管理)
+- id (PK)
+- facility_id (FK)
+- category (enum: electrical, gas, water, communication, elevator, hvac)
+- subcategory - 小分類
+- equipment_type - 設備種別
+- manufacturer - メーカー
+- model - 型式
+- installation_date - 設置年月日
+- last_update_date - 更新年月日
+- maintenance_company - 保守業者
+- maintenance_date - 保守実施日
+- inspection_date - 点検実施日
+- notes - 備考
+- status - ステータス
+- created_at, updated_at
+
+**contract_records テーブル** (契約管理)
+- id (PK)
+- facility_id (FK)
+- contract_type (enum: kitchen, cleaning, pest_control, linen, parking, karaoke, vending_machine, beauty, snow_removal, waste_disposal, grease_trap, other)
+- company_name - 会社名
+- contract_start_date - 契約開始日
+- contract_end_date - 契約終了日
+- auto_renewal - 自動更新の有無
+- amount - 契約金額
+- notes - 備考
 - status - ステータス
 - created_at, updated_at
 
@@ -309,28 +559,6 @@ class AnnualVerification extends Model
 - user_agent - ユーザーエージェント
 - created_at
 
-**meeting_schedules テーブル** (定例会管理)
-- id (PK)
-- title - 会議名
-- meeting_date - 開催日時
-- department_id (FK) - 主催部門
-- attendees (JSON) - 参加者リスト
-- agenda (TEXT) - 議題
-- status (enum: scheduled, completed, cancelled)
-- created_by (FK)
-- created_at, updated_at
-
-**facility_utilization テーブル** (施設稼働状況)
-- id (PK)
-- facility_id (FK)
-- year_month - 対象年月（YYYY-MM形式）
-- capacity - 定員
-- actual_users - 実利用者数
-- utilization_rate - 稼働率（自動計算）
-- notes - 備考
-- created_by (FK)
-- created_at, updated_at
-
 **contract_alerts テーブル** (契約期限アラート)
 - id (PK)
 - facility_id (FK)
@@ -356,6 +584,9 @@ class AnnualVerification extends Model
 - Facility → AnnualVerification (一対多)
 - User → ExportFavorite (一対多)
 - User → AuditLog (一対多)
+- Facility → ContractAlert (一対多)
+- Facility → EquipmentRecord (一対多)
+- Facility → ContractRecord (一対多)
 
 ## エラーハンドリング
 
@@ -429,13 +660,13 @@ class FacilityFactory extends Factory
     {
         return [
             'facility_code' => $this->faker->unique()->numerify('F####'),
-            'name' => $this->faker->company . '事業所',
+            'name' => $this->faker->company . '事業所', // Required field
             'prefecture' => $this->faker->prefecture,
             'city' => $this->faker->city,
-            'postal_code' => $this->faker->numerify('#######'),
+            'postal_code' => $this->faker->optional()->numerify('#######'), // Optional
             'address' => $this->faker->address,
             'phone_number' => $this->faker->phoneNumber,
-            'opening_date' => $this->faker->date(),
+            'opening_date' => $this->faker->optional()->date(), // Optional
             'business_type' => $this->faker->randomElement(['通所介護', '訪問介護', '居宅介護支援']),
             'capacity' => $this->faker->numberBetween(10, 100),
             'floor_area' => $this->faker->randomFloat(2, 100, 1000),
@@ -578,47 +809,53 @@ class FacilityPolicy
 2. **データベースマイグレーション**
    - 段階的スキーマ変更
    - 後方互換性の維持
-### 8. 
-定例会・会議管理システム
+### 7. 契約期限アラートシステム
 
-#### MeetingSchedule Model
+#### EquipmentRecord Model
 ```php
-class MeetingSchedule extends Model
+class EquipmentRecord extends Model
 {
     protected $fillable = [
-        'title', 'meeting_date', 'department_id', 'attendees',
-        'agenda', 'status', 'created_by'
+        'facility_id', 'category', 'subcategory', 'equipment_type',
+        'manufacturer', 'model', 'installation_date', 'last_update_date',
+        'maintenance_company', 'maintenance_date', 'inspection_date',
+        'notes', 'status'
     ];
     
-    protected $casts = [
-        'attendees' => 'array',
-        'meeting_date' => 'datetime'
-    ];
+    protected $dates = ['installation_date', 'last_update_date', 'maintenance_date', 'inspection_date'];
+    
+    const CATEGORY_ELECTRICAL = 'electrical';
+    const CATEGORY_GAS = 'gas';
+    const CATEGORY_WATER = 'water';
+    const CATEGORY_COMMUNICATION = 'communication';
+    const CATEGORY_ELEVATOR = 'elevator';
+    const CATEGORY_HVAC = 'hvac';
 }
-```
 
-### 9. 施設稼働状況管理システム
-
-#### FacilityUtilization Model
+#### ContractRecord Model
 ```php
-class FacilityUtilization extends Model
+class ContractRecord extends Model
 {
     protected $fillable = [
-        'facility_id', 'year_month', 'capacity', 'actual_users',
-        'utilization_rate', 'notes', 'created_by'
+        'facility_id', 'contract_type', 'company_name', 'contract_start_date',
+        'contract_end_date', 'auto_renewal', 'amount', 'notes', 'status'
     ];
     
-    // 稼働率自動計算
-    public function calculateUtilizationRate()
-    {
-        if ($this->capacity > 0) {
-            $this->utilization_rate = ($this->actual_users / $this->capacity) * 100;
-        }
-    }
+    protected $dates = ['contract_start_date', 'contract_end_date'];
+    
+    const TYPE_KITCHEN = 'kitchen';
+    const TYPE_CLEANING = 'cleaning';
+    const TYPE_PEST_CONTROL = 'pest_control';
+    const TYPE_LINEN = 'linen';
+    const TYPE_PARKING = 'parking';
+    const TYPE_KARAOKE = 'karaoke';
+    const TYPE_VENDING_MACHINE = 'vending_machine';
+    const TYPE_BEAUTY = 'beauty';
+    const TYPE_SNOW_REMOVAL = 'snow_removal';
+    const TYPE_WASTE_DISPOSAL = 'waste_disposal';
+    const TYPE_GREASE_TRAP = 'grease_trap';
+    const TYPE_OTHER = 'other';
 }
-```
-
-### 10. 契約期限アラートシステム
 
 #### ContractAlert Model
 ```php
@@ -637,28 +874,7 @@ class ContractAlert extends Model
 }
 ```
 
-## 定例会サポート機能設計
-
-### 会議用レポート生成
-
-```php
-class MeetingReportService
-{
-    public function generateMeetingReport($departmentId, $reportType)
-    {
-        $facilities = Facility::where('department_id', $departmentId)
-            ->with(['utilization', 'contractAlerts', 'maintenanceHistories'])
-            ->get();
-            
-        return [
-            'facilities_summary' => $this->getFacilitiesSummary($facilities),
-            'utilization_report' => $this->getUtilizationReport($facilities),
-            'contract_alerts' => $this->getContractAlerts($facilities),
-            'maintenance_summary' => $this->getMaintenanceSummary($facilities)
-        ];
-    }
-}
-```
+## 契約期限監視システム設計
 
 ### 契約期限監視システム
 

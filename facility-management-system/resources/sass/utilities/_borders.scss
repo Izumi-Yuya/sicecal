@@ -1,0 +1,159 @@
+/*
+ * Border Utilities
+ * 
+ * Utility classes for consistent border styling
+ * Includes border radius, width, and style utilities
+ */
+
+// Border Radius Utilities
+@each $name, $radius in $border-radiuses {
+    .rounded-#{$name} {
+        border-radius: #{$radius} !important;
+    }
+}
+
+// Individual Corner Border Radius
+@each $name, $radius in $border-radiuses {
+    .rounded-t-#{$name} {
+        border-top-left-radius: #{$radius} !important;
+        border-top-right-radius: #{$radius} !important;
+    }
+
+    .rounded-r-#{$name} {
+        border-top-right-radius: #{$radius} !important;
+        border-bottom-right-radius: #{$radius} !important;
+    }
+
+    .rounded-b-#{$name} {
+        border-bottom-left-radius: #{$radius} !important;
+        border-bottom-right-radius: #{$radius} !important;
+    }
+
+    .rounded-l-#{$name} {
+        border-top-left-radius: #{$radius} !important;
+        border-bottom-left-radius: #{$radius} !important;
+    }
+
+    .rounded-tl-#{$name} {
+        border-top-left-radius: #{$radius} !important;
+    }
+
+    .rounded-tr-#{$name} {
+        border-top-right-radius: #{$radius} !important;
+    }
+
+    .rounded-br-#{$name} {
+        border-bottom-right-radius: #{$radius} !important;
+    }
+
+    .rounded-bl-#{$name} {
+        border-bottom-left-radius: #{$radius} !important;
+    }
+}
+
+// Border Width Utilities
+@each $width, $value in $border-widths {
+    .border-#{$width} {
+        border-width: #{$value} !important;
+    }
+
+    .border-t-#{$width} {
+        border-top-width: #{$value} !important;
+    }
+
+    .border-r-#{$width} {
+        border-right-width: #{$value} !important;
+    }
+
+    .border-b-#{$width} {
+        border-bottom-width: #{$value} !important;
+    }
+
+    .border-l-#{$width} {
+        border-left-width: #{$value} !important;
+    }
+}
+
+// Border Style Utilities
+.border-solid {
+    border-style: solid !important;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+}
+
+.border-dotted {
+    border-style: dotted !important;
+}
+
+.border-none {
+    border-style: none !important;
+}
+
+// Component-Specific Border Utilities
+.btn-rounded {
+    border-radius: $button-border-radius !important;
+}
+
+.input-rounded {
+    border-radius: $input-border-radius !important;
+}
+
+.card-rounded {
+    border-radius: $card-border-radius !important;
+}
+
+.modal-rounded {
+    border-radius: $modal-border-radius !important;
+}
+
+.badge-rounded {
+    border-radius: $badge-border-radius !important;
+}
+
+.alert-rounded {
+    border-radius: $alert-border-radius !important;
+}
+
+// Border Utilities with Colors (extending color utilities)
+.border {
+    border: 1px solid $border-color !important;
+}
+
+.border-top {
+    border-top: 1px solid $border-color !important;
+}
+
+.border-right {
+    border-right: 1px solid $border-color !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid $border-color !important;
+}
+
+.border-left {
+    border-left: 1px solid $border-color !important;
+}
+
+// Remove borders
+.border-0 {
+    border: 0 !important;
+}
+
+.border-top-0 {
+    border-top: 0 !important;
+}
+
+.border-right-0 {
+    border-right: 0 !important;
+}
+
+.border-bottom-0 {
+    border-bottom: 0 !important;
+}
+
+.border-left-0 {
+    border-left: 0 !important;
+}

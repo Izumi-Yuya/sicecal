@@ -1,0 +1,237 @@
+/*
+ * Components - Alerts
+ * 
+ * Alert and notification component styles
+ */
+
+// Base alert styles
+.alert {
+    position: relative;
+    padding: $spacing-4 $spacing-5;
+    margin-bottom: $spacing-4;
+    border: none;
+    border-left: 4px solid;
+    border-radius: $alert-border-radius;
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
+
+    // Alert variants
+    &.alert-primary {
+        color: darken($primary, 20%);
+        background-color: lighten($primary, 45%);
+        border-left-color: $primary;
+    }
+
+    &.alert-secondary {
+        color: darken($secondary, 20%);
+        background-color: lighten($secondary, 35%);
+        border-left-color: $secondary;
+    }
+
+    &.alert-success {
+        color: darken($success, 20%);
+        background-color: lighten($success, 45%);
+        border-left-color: $success;
+    }
+
+    &.alert-warning {
+        color: darken($warning, 30%);
+        background-color: lighten($warning, 35%);
+        border-left-color: $warning;
+    }
+
+    &.alert-danger {
+        color: darken($danger, 20%);
+        background-color: lighten($danger, 40%);
+        border-left-color: $danger;
+    }
+
+    &.alert-info {
+        color: darken($info, 30%);
+        background-color: lighten($info, 40%);
+        border-left-color: $info;
+    }
+
+    &.alert-light {
+        color: $gray-700;
+        background-color: $gray-50;
+        border-left-color: $gray-300;
+    }
+
+    &.alert-dark {
+        color: $white;
+        background-color: $gray-700;
+        border-left-color: $gray-900;
+    }
+}
+
+// Alert headings
+.alert-heading {
+    color: inherit;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-2;
+}
+
+// Alert links
+.alert-link {
+    font-weight: $font-weight-semibold;
+    color: inherit;
+    text-decoration: underline;
+
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+// Dismissible alerts
+.alert-dismissible {
+    padding-right: 3rem;
+
+    .btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        padding: calc($spacing-4 + $spacing-1) $spacing-5;
+    }
+}
+
+// Close button
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: $gray-900;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='m.235.757 14.014 14.009m0-14.009L.235 14.766'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.375rem;
+    opacity: 0.5;
+    cursor: pointer;
+
+    &:hover {
+        color: $gray-900;
+        text-decoration: none;
+        opacity: 0.75;
+    }
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba($primary, 0.25);
+        opacity: 1;
+    }
+
+    &:disabled,
+    &.disabled {
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.25;
+    }
+}
+
+// System notifications (dashboard specific)
+.system-notifications {
+    .alert {
+        border-radius: 10px;
+        border: none;
+        padding: $spacing-4 $spacing-5;
+
+        .notification-header {
+            display: flex;
+            align-items: flex-start;
+
+            i {
+                font-size: 1.2rem;
+                margin-top: 0.1rem;
+                margin-right: $spacing-3;
+            }
+
+            .notification-content {
+                flex: 1;
+
+                strong {
+                    font-weight: $font-weight-semibold;
+                    display: block;
+                    margin-bottom: $spacing-1;
+                }
+
+                small {
+                    line-height: $line-height-relaxed;
+                }
+            }
+        }
+    }
+}
+
+// Contract alerts (dashboard specific)
+.contract-alerts {
+    .alert {
+        border-radius: $alert-border-radius;
+        border: none;
+        padding: $spacing-3 $spacing-4;
+        margin-bottom: $spacing-3;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        strong {
+            display: block;
+            font-weight: $font-weight-semibold;
+            margin-bottom: $spacing-1;
+        }
+
+        small {
+            font-size: $font-size-sm;
+        }
+    }
+}
+
+// Toast notifications
+.toast {
+    max-width: 350px;
+    font-size: $font-size-sm;
+    background-color: $white;
+    background-clip: padding-box;
+    border: $border-width-1 solid rgba($gray-900, 0.1);
+    box-shadow: $shadow-lg;
+    border-radius: $border-radius-md;
+    opacity: 0;
+
+    &:not(.showing):not(.show) {
+        opacity: 0;
+    }
+
+    &.hide {
+        display: none;
+    }
+}
+
+.toast-container {
+    position: absolute;
+    z-index: 1090;
+    max-width: 100%;
+    pointer-events: none;
+
+    > :not(:last-child) {
+        margin-bottom: $spacing-3;
+    }
+}
+
+.toast-header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-2 $spacing-3;
+    color: $text-secondary;
+    background-color: $bg-secondary;
+    background-clip: padding-box;
+    border-bottom: $border-width-1 solid rgba($gray-900, 0.05);
+    border-top-left-radius: calc(#{$border-radius-md} - #{$border-width-1});
+    border-top-right-radius: calc(#{$border-radius-md} - #{$border-width-1});
+}
+
+.toast-body {
+    padding: $spacing-3;
+    word-wrap: break-word;
+}

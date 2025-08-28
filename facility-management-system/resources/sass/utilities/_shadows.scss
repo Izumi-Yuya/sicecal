@@ -1,0 +1,187 @@
+/*
+ * Shadow Utilities
+ * 
+ * Utility classes for consistent shadow application
+ * Includes elevation levels and interactive shadow states
+ */
+
+// Shadow Utilities
+@each $name, $shadow in $shadows {
+    .shadow-#{$name} {
+        box-shadow: #{$shadow} !important;
+    }
+}
+
+// Hover Shadow Utilities
+.hover-shadow-sm:hover {
+    box-shadow: $shadow-hover-sm !important;
+    transition: box-shadow 0.2s ease !important;
+}
+
+.hover-shadow-base:hover {
+    box-shadow: $shadow-hover-base !important;
+    transition: box-shadow 0.2s ease !important;
+}
+
+.hover-shadow-lg:hover {
+    box-shadow: $shadow-hover-lg !important;
+    transition: box-shadow 0.2s ease !important;
+}
+
+// Component-Specific Shadow Utilities
+.card-shadow {
+    box-shadow: $card-shadow !important;
+
+    &:hover {
+        box-shadow: $card-shadow-hover !important;
+        transition: box-shadow 0.2s ease !important;
+    }
+}
+
+.button-shadow {
+    box-shadow: $button-shadow !important;
+
+    &:hover {
+        box-shadow: $button-shadow-hover !important;
+        transition: box-shadow 0.2s ease !important;
+    }
+}
+
+.dropdown-shadow {
+    box-shadow: $dropdown-shadow !important;
+}
+
+.modal-shadow {
+    box-shadow: $modal-shadow !important;
+}
+
+.header-shadow {
+    box-shadow: $header-shadow !important;
+}
+
+// Focus Shadow Utilities
+.focus-shadow-primary:focus {
+    box-shadow: $focus-shadow-primary !important;
+}
+
+.focus-shadow-success:focus {
+    box-shadow: $focus-shadow-success !important;
+}
+
+.focus-shadow-warning:focus {
+    box-shadow: $focus-shadow-warning !important;
+}
+
+.focus-shadow-danger:focus {
+    box-shadow: $focus-shadow-danger !important;
+}
+
+.focus-shadow-info:focus {
+    box-shadow: $focus-shadow-info !important;
+}
+
+// Interactive Element Shadows with Transform
+.interactive-shadow {
+    box-shadow: $shadow-sm !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+        box-shadow: $shadow-md !important;
+        transform: translateY(-2px) !important;
+    }
+
+    &:active {
+        box-shadow: $shadow-xs !important;
+        transform: translateY(0) !important;
+    }
+}
+
+.interactive-shadow-lg {
+    box-shadow: $shadow-md !important;
+    transition: all 0.3s ease !important;
+
+    &:hover {
+        box-shadow: $shadow-lg !important;
+        transform: translateY(-3px) !important;
+    }
+
+    &:active {
+        box-shadow: $shadow-sm !important;
+        transform: translateY(-1px) !important;
+    }
+}
+
+// Card Interactive Shadows
+.card-interactive {
+    box-shadow: $card-shadow !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+        box-shadow: $card-shadow-hover !important;
+        transform: translateY(-2px) !important;
+    }
+}
+
+// Button Interactive Shadows
+.btn-interactive {
+    box-shadow: $button-shadow !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+        box-shadow: $button-shadow-hover !important;
+        transform: translateY(-1px) !important;
+    }
+
+    &:active {
+        box-shadow: none !important;
+        transform: translateY(0) !important;
+    }
+}
+
+// Inset Shadows
+.shadow-inset {
+    box-shadow: inset 0 2px 4px 0 $shadow-color-light !important;
+}
+
+.shadow-inset-lg {
+    box-shadow: inset 0 4px 8px 0 $shadow-color !important;
+}
+
+// Text Shadows
+.text-shadow-sm {
+    text-shadow: 0 1px 2px $shadow-color !important;
+}
+
+.text-shadow-base {
+    text-shadow: 0 1px 3px $shadow-color !important;
+}
+
+.text-shadow-lg {
+    text-shadow: 0 2px 4px $shadow-color !important;
+}
+
+.text-shadow-none {
+    text-shadow: none !important;
+}
+
+// Glow Effects
+.glow-primary {
+    box-shadow: 0 0 20px rgba(0, 180, 227, 0.3) !important;
+}
+
+.glow-success {
+    box-shadow: 0 0 20px rgba(25, 135, 84, 0.3) !important;
+}
+
+.glow-warning {
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.3) !important;
+}
+
+.glow-danger {
+    box-shadow: 0 0 20px rgba(220, 53, 69, 0.3) !important;
+}
+
+// Remove shadows
+.shadow-none {
+    box-shadow: none !important;
+}

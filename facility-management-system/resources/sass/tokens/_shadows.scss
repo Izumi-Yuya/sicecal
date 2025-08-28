@@ -1,0 +1,55 @@
+/*
+ * Design Tokens - Shadows
+ * 
+ * Box shadow definitions for elevation and depth
+ * Used for cards, modals, dropdowns, and interactive elements
+ */
+
+// Shadow Base Colors
+$shadow-color: rgba(0, 0, 0, 0.1);
+$shadow-color-light: rgba(0, 0, 0, 0.075);
+$shadow-color-medium: rgba(0, 0, 0, 0.15);
+$shadow-color-dark: rgba(0, 0, 0, 0.25);
+
+// Elevation Levels
+$shadow-none: none;
+$shadow-xs: 0 1px 2px 0 $shadow-color-light;
+$shadow-sm: 0 1px 3px 0 $shadow-color, 0 1px 2px 0 $shadow-color-light;
+$shadow-base: 0 1px 3px 0 $shadow-color, 0 1px 2px 0 $shadow-color-light;
+$shadow-md: 0 4px 6px -1px $shadow-color, 0 2px 4px -1px $shadow-color-light;
+$shadow-lg: 0 10px 15px -3px $shadow-color, 0 4px 6px -2px $shadow-color-light;
+$shadow-xl: 0 20px 25px -5px $shadow-color, 0 10px 10px -5px $shadow-color-light;
+$shadow-2xl: 0 25px 50px -12px $shadow-color-dark;
+
+// Interactive Shadows (for hover states)
+$shadow-hover-sm: 0 2px 4px 0 $shadow-color;
+$shadow-hover-base: 0 4px 8px 0 $shadow-color-medium;
+$shadow-hover-lg: 0 8px 16px 0 $shadow-color-medium;
+
+// Component Specific Shadows
+$card-shadow: $shadow-sm;
+$card-shadow-hover: $shadow-md;
+$button-shadow: $shadow-xs;
+$button-shadow-hover: $shadow-sm;
+$dropdown-shadow: $shadow-lg;
+$modal-shadow: $shadow-2xl;
+$header-shadow: $shadow-sm;
+
+// Focus Shadows (for form elements)
+$focus-shadow-primary: 0 0 0 0.2rem rgba(0, 180, 227, 0.25);
+$focus-shadow-success: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+$focus-shadow-warning: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+$focus-shadow-danger: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+$focus-shadow-info: 0 0 0 0.2rem rgba(13, 202, 240, 0.25);
+
+// Shadow Map for Utility Generation
+$shadows: (
+    'none': $shadow-none,
+    'xs': $shadow-xs,
+    'sm': $shadow-sm,
+    'base': $shadow-base,
+    'md': $shadow-md,
+    'lg': $shadow-lg,
+    'xl': $shadow-xl,
+    '2xl': $shadow-2xl
+);

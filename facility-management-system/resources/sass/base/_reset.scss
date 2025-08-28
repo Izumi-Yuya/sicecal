@@ -1,0 +1,91 @@
+/*
+ * Base - Reset
+ * 
+ * CSS reset and normalization for consistent cross-browser styling
+ */
+
+// Box sizing reset
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Remove default margins and padding
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// Improve text rendering
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+// Set base font and line height
+body {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
+    color: $text-primary;
+    background-color: $bg-primary;
+}
+
+// Remove list styles
+ul,
+ol {
+    list-style: none;
+}
+
+// Remove default button styles
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+// Remove default link styles
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+// Improve media defaults
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+// Improve form element defaults
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+// Remove default fieldset styles
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+// Improve table defaults
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+// Focus styles for accessibility
+:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+}

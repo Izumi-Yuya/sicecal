@@ -1,0 +1,205 @@
+/*
+ * Components - Cards
+ * 
+ * Card component styles with variants and interactive states
+ */
+
+// Base card styles
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $white;
+    background-clip: border-box;
+    border: $border-width-1 solid $border-color;
+    border-radius: $card-border-radius;
+    box-shadow: $card-shadow;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $card-shadow-hover;
+    }
+}
+
+// Card body
+.card-body {
+    flex: 1 1 auto;
+    padding: $card-body-padding;
+}
+
+// Card header
+.card-header {
+    padding: $card-header-padding;
+    margin-bottom: 0;
+    background-color: $bg-secondary;
+    border-bottom: $border-width-1 solid $border-color;
+    border-top-left-radius: calc(#{$card-border-radius} - #{$border-width-1});
+    border-top-right-radius: calc(#{$card-border-radius} - #{$border-width-1});
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+
+    &:first-child {
+        border-radius: $card-border-radius $card-border-radius 0 0;
+    }
+}
+
+// Card footer
+.card-footer {
+    padding: $card-header-padding;
+    background-color: $bg-secondary;
+    border-top: $border-width-1 solid $border-color;
+    border-bottom-right-radius: calc(#{$card-border-radius} - #{$border-width-1});
+    border-bottom-left-radius: calc(#{$card-border-radius} - #{$border-width-1});
+
+    &:last-child {
+        border-radius: 0 0 $card-border-radius $card-border-radius;
+    }
+}
+
+// Card title
+.card-title {
+    margin-bottom: $spacing-3;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+}
+
+// Card subtitle
+.card-subtitle {
+    margin-top: -$spacing-2;
+    margin-bottom: 0;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+}
+
+// Card text
+.card-text:last-child {
+    margin-bottom: 0;
+}
+
+// Card link
+.card-link {
+    &:hover {
+        text-decoration: none;
+    }
+
+    +.card-link {
+        margin-left: $spacing-4;
+    }
+}
+
+// Dashboard specific card variants
+.dashboard-card {
+    border: none;
+    border-radius: $card-border-radius;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0.25rem 2rem 0 rgba(58, 59, 69, 0.2);
+    }
+
+    .card-body {
+        padding: $spacing-6;
+    }
+}
+
+// Border accent cards
+.border-left-primary {
+    border-left: 4px solid $primary !important;
+}
+
+.border-left-success {
+    border-left: 4px solid $success !important;
+}
+
+.border-left-warning {
+    border-left: 4px solid $warning !important;
+}
+
+.border-left-info {
+    border-left: 4px solid $info !important;
+}
+
+.border-left-danger {
+    border-left: 4px solid $danger !important;
+}
+
+// Welcome card variant
+.dashboard-welcome {
+    background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($secondary, 0.1) 100%);
+    border: none;
+    border-radius: $card-border-radius;
+
+    .card-body {
+        padding: $spacing-6 $spacing-8;
+    }
+}
+
+// Card image
+.card-img,
+.card-img-top,
+.card-img-bottom {
+    width: 100%;
+}
+
+.card-img,
+.card-img-top {
+    border-top-left-radius: calc(#{$card-border-radius} - #{$border-width-1});
+    border-top-right-radius: calc(#{$card-border-radius} - #{$border-width-1});
+}
+
+.card-img,
+.card-img-bottom {
+    border-bottom-right-radius: calc(#{$card-border-radius} - #{$border-width-1});
+    border-bottom-left-radius: calc(#{$card-border-radius} - #{$border-width-1});
+}
+
+// Card overlay
+.card-img-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: $card-body-padding;
+    border-radius: calc(#{$card-border-radius} - #{$border-width-1});
+}
+
+// Card groups
+.card-group {
+    display: flex;
+    flex-direction: column;
+
+    >.card {
+        margin-bottom: $spacing-4;
+    }
+
+    @media (min-width: 576px) {
+        flex-direction: row;
+
+        >.card {
+            flex: 1 0 0%;
+            margin-bottom: 0;
+
+            +.card {
+                margin-left: 0;
+                border-left: 0;
+            }
+
+            &:not(:last-child) {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            &:not(:first-child) {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+}

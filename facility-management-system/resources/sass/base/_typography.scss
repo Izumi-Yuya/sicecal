@@ -1,0 +1,129 @@
+/*
+ * Base - Typography
+ * 
+ * Base typography styles and heading definitions
+ */
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-family-heading;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-tight;
+    color: $text-primary;
+    margin-bottom: $spacing-4;
+}
+
+h1 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+}
+
+h2 {
+    font-size: $font-size-3xl;
+}
+
+h3 {
+    font-size: $font-size-2xl;
+}
+
+h4 {
+    font-size: $font-size-xl;
+}
+
+h5 {
+    font-size: $font-size-lg;
+}
+
+h6 {
+    font-size: $font-size-base;
+}
+
+// Paragraphs
+p {
+    margin-bottom: $spacing-4;
+    line-height: $line-height-relaxed;
+}
+
+// Links
+a {
+    color: $primary;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: darken($primary, 10%);
+        text-decoration: underline;
+    }
+
+    &:focus {
+        outline: 2px solid $primary;
+        outline-offset: 2px;
+    }
+}
+
+// Text emphasis
+strong,
+b {
+    font-weight: $font-weight-semibold;
+}
+
+em,
+i {
+    font-style: italic;
+}
+
+// Small text
+small {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+}
+
+// Code
+code {
+    font-family: $font-family-monospace;
+    font-size: 0.875em;
+    background-color: $gray-100;
+    padding: 0.125rem 0.25rem;
+    border-radius: $border-radius-sm;
+}
+
+// Blockquotes
+blockquote {
+    border-left: 4px solid $primary;
+    padding-left: $spacing-4;
+    margin: $spacing-6 0;
+    font-style: italic;
+    color: $text-secondary;
+}
+
+// Lists
+ul,
+ol {
+    margin-bottom: $spacing-4;
+    padding-left: $spacing-6;
+
+    li {
+        margin-bottom: $spacing-1;
+    }
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+// Horizontal rule
+hr {
+    border: none;
+    height: 1px;
+    background-color: $border-color;
+    margin: $spacing-8 0;
+}

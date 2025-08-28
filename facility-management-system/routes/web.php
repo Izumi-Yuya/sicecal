@@ -157,3 +157,8 @@ Route::post('/password/reset', function (Illuminate\Http\Request $request) {
     // デモ用：実際にはパスワード更新処理を行う
     return redirect()->route('login')->with('success', 'パスワードが正常にリセットされました。新しいパスワードでログインしてください。');
 })->name('password.update');
+
+// Facility Management Routes
+Route::group(['middleware' => 'web'], function () {
+    Route::resource('facilities', App\Http\Controllers\FacilityController::class);
+});

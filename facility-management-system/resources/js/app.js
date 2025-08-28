@@ -5,17 +5,30 @@ import '../sass/app.scss';
 
 // Custom JavaScript for the application
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize tooltips
+    // Initialize Bootstrap components
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
-    // Initialize popovers
     const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
     const popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl);
     });
+
+    // Initialize Bootstrap dropdowns
+    const dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+    const dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl);
+    });
+
+    // Handle logout form submission
+    const logoutForm = document.getElementById('logout-form');
+    if (logoutForm) {
+        logoutForm.addEventListener('submit', function (e) {
+            console.log('Logout form submitted');
+        });
+    }
 
     // File upload drag and drop functionality
     const fileUploadAreas = document.querySelectorAll('.file-upload-area');

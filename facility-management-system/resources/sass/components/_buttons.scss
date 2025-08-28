@@ -1,0 +1,257 @@
+/*
+ * Components - Buttons
+ * 
+ * Button component styles with variants and states
+ */
+
+// Base button styles
+.btn {
+    display: inline-block;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-normal;
+    color: $text-primary;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: $border-width-1 solid transparent;
+    padding: $component-padding-base;
+    font-size: $font-size-base;
+    border-radius: $button-border-radius;
+    transition: all 0.2s ease;
+
+    &:hover {
+        color: $text-primary;
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+
+    &:focus {
+        outline: 0;
+        box-shadow: $focus-shadow-primary;
+    }
+
+    &:disabled,
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+// Button sizes
+.btn-sm {
+    padding: $component-padding-sm;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
+}
+
+.btn-lg {
+    padding: $component-padding-lg;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-md;
+}
+
+// Button variants
+.btn-primary {
+    color: $white;
+    background-color: $primary;
+    border-color: $primary;
+
+    &:hover {
+        color: $white;
+        background-color: darken($primary, 7.5%);
+        border-color: darken($primary, 10%);
+    }
+
+    &:focus {
+        color: $white;
+        background-color: darken($primary, 7.5%);
+        border-color: darken($primary, 10%);
+        box-shadow: $focus-shadow-primary;
+    }
+
+    &:active {
+        color: $white;
+        background-color: darken($primary, 10%);
+        border-color: darken($primary, 12.5%);
+    }
+
+    &:disabled {
+        color: $white;
+        background-color: $primary;
+        border-color: $primary;
+    }
+}
+
+.btn-secondary {
+    color: $white;
+    background-color: $secondary;
+    border-color: $secondary;
+
+    &:hover {
+        color: $white;
+        background-color: darken($secondary, 7.5%);
+        border-color: darken($secondary, 10%);
+    }
+
+    &:focus {
+        color: $white;
+        background-color: darken($secondary, 7.5%);
+        border-color: darken($secondary, 10%);
+        box-shadow: 0 0 0 0.2rem rgba(242, 124, 166, 0.25);
+    }
+}
+
+.btn-success {
+    color: $white;
+    background-color: $success;
+    border-color: $success;
+
+    &:hover {
+        color: $white;
+        background-color: darken($success, 7.5%);
+        border-color: darken($success, 10%);
+    }
+
+    &:focus {
+        box-shadow: $focus-shadow-success;
+    }
+}
+
+.btn-warning {
+    color: $gray-900;
+    background-color: $warning;
+    border-color: $warning;
+
+    &:hover {
+        color: $gray-900;
+        background-color: darken($warning, 7.5%);
+        border-color: darken($warning, 10%);
+    }
+
+    &:focus {
+        box-shadow: $focus-shadow-warning;
+    }
+}
+
+.btn-danger {
+    color: $white;
+    background-color: $danger;
+    border-color: $danger;
+
+    &:hover {
+        color: $white;
+        background-color: darken($danger, 7.5%);
+        border-color: darken($danger, 10%);
+    }
+
+    &:focus {
+        box-shadow: $focus-shadow-danger;
+    }
+}
+
+.btn-info {
+    color: $gray-900;
+    background-color: $info;
+    border-color: $info;
+
+    &:hover {
+        color: $gray-900;
+        background-color: darken($info, 7.5%);
+        border-color: darken($info, 10%);
+    }
+
+    &:focus {
+        box-shadow: $focus-shadow-info;
+    }
+}
+
+// Outline button variants
+.btn-outline-primary {
+    color: $primary;
+    border-color: $primary;
+
+    &:hover {
+        color: $white;
+        background-color: $primary;
+        border-color: $primary;
+    }
+
+    &:focus {
+        box-shadow: $focus-shadow-primary;
+    }
+}
+
+.btn-outline-secondary {
+    color: $secondary;
+    border-color: $secondary;
+
+    &:hover {
+        color: $white;
+        background-color: $secondary;
+        border-color: $secondary;
+    }
+}
+
+// Link button
+.btn-link {
+    font-weight: $font-weight-normal;
+    color: $primary;
+    text-decoration: none;
+
+    &:hover {
+        color: darken($primary, 15%);
+        text-decoration: underline;
+    }
+
+    &:focus {
+        text-decoration: underline;
+    }
+
+    &:disabled {
+        color: $text-muted;
+        pointer-events: none;
+    }
+}
+
+// Button groups
+.btn-group {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+
+    >.btn {
+        position: relative;
+        flex: 1 1 auto;
+
+        &:hover {
+            z-index: 1;
+        }
+
+        &:focus,
+        &:active {
+            z-index: 1;
+        }
+    }
+
+    >.btn:not(:first-child) {
+        margin-left: -$border-width-1;
+    }
+
+    >.btn:not(:last-child):not(.dropdown-toggle) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    >.btn:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}

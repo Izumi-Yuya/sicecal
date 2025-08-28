@@ -1,0 +1,245 @@
+/*
+ * Typography Utilities
+ * 
+ * Utility classes for consistent typography application
+ * Includes font sizes, weights, and line heights
+ */
+
+// Font Size Utilities
+@each $name, $size in $font-sizes {
+    .text-#{$name} {
+        font-size: #{$size} !important;
+    }
+}
+
+// Font Weight Utilities
+@each $name, $weight in $font-weights {
+    .font-#{$name} {
+        font-weight: #{$weight} !important;
+    }
+}
+
+// Line Height Utilities
+@each $name, $height in $line-heights {
+    .leading-#{$name} {
+        line-height: #{$height} !important;
+    }
+}
+
+// Font Family Utilities
+.font-base {
+    font-family: $font-family-base !important;
+}
+
+.font-heading {
+    font-family: $font-family-heading !important;
+}
+
+.font-mono {
+    font-family: $font-family-monospace !important;
+}
+
+// Text Alignment Utilities (enhanced)
+.text-left {
+    text-align: left !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-justify {
+    text-align: justify !important;
+}
+
+// Text Transform Utilities
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+
+.text-lowercase {
+    text-transform: lowercase !important;
+}
+
+.text-capitalize {
+    text-transform: capitalize !important;
+}
+
+.text-normal-case {
+    text-transform: none !important;
+}
+
+// Text Decoration Utilities
+.text-underline {
+    text-decoration: underline !important;
+}
+
+.text-line-through {
+    text-decoration: line-through !important;
+}
+
+.text-no-underline {
+    text-decoration: none !important;
+}
+
+// Letter Spacing Utilities
+.tracking-tighter {
+    letter-spacing: $letter-spacing-tighter !important;
+}
+
+.tracking-tight {
+    letter-spacing: $letter-spacing-tight !important;
+}
+
+.tracking-normal {
+    letter-spacing: $letter-spacing-normal !important;
+}
+
+.tracking-wide {
+    letter-spacing: $letter-spacing-wide !important;
+}
+
+.tracking-wider {
+    letter-spacing: $letter-spacing-wider !important;
+}
+
+.tracking-widest {
+    letter-spacing: $letter-spacing-widest !important;
+}
+
+// Text Overflow Utilities
+.text-ellipsis {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.text-clip {
+    text-overflow: clip !important;
+}
+
+// White Space Utilities
+.whitespace-normal {
+    white-space: normal !important;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap !important;
+}
+
+.whitespace-pre {
+    white-space: pre !important;
+}
+
+.whitespace-pre-line {
+    white-space: pre-line !important;
+}
+
+.whitespace-pre-wrap {
+    white-space: pre-wrap !important;
+}
+
+// Word Break Utilities
+.break-normal {
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+}
+
+.break-words {
+    overflow-wrap: break-word !important;
+}
+
+.break-all {
+    word-break: break-all !important;
+}
+
+// Heading Utilities (combining size and weight)
+.heading-1 {
+    font-size: $font-size-3xl !important;
+    font-weight: $font-weight-bold !important;
+    line-height: $line-height-tight !important;
+    font-family: $font-family-heading !important;
+}
+
+.heading-2 {
+    font-size: $font-size-2xl !important;
+    font-weight: $font-weight-semibold !important;
+    line-height: $line-height-snug !important;
+    font-family: $font-family-heading !important;
+}
+
+.heading-3 {
+    font-size: $font-size-xl !important;
+    font-weight: $font-weight-semibold !important;
+    line-height: $line-height-snug !important;
+    font-family: $font-family-heading !important;
+}
+
+.heading-4 {
+    font-size: $font-size-lg !important;
+    font-weight: $font-weight-medium !important;
+    line-height: $line-height-normal !important;
+    font-family: $font-family-heading !important;
+}
+
+.heading-5 {
+    font-size: $font-size-base !important;
+    font-weight: $font-weight-medium !important;
+    line-height: $line-height-normal !important;
+    font-family: $font-family-heading !important;
+}
+
+.heading-6 {
+    font-size: $font-size-sm !important;
+    font-weight: $font-weight-medium !important;
+    line-height: $line-height-normal !important;
+    font-family: $font-family-heading !important;
+}
+
+// Body Text Utilities
+.body-large {
+    font-size: $font-size-lg !important;
+    line-height: $line-height-relaxed !important;
+    font-weight: $font-weight-normal !important;
+}
+
+.body-base {
+    font-size: $font-size-base !important;
+    line-height: $line-height-normal !important;
+    font-weight: $font-weight-normal !important;
+}
+
+.body-small {
+    font-size: $font-size-sm !important;
+    line-height: $line-height-normal !important;
+    font-weight: $font-weight-normal !important;
+}
+
+// Caption and Label Utilities
+.caption {
+    font-size: $font-size-xs !important;
+    line-height: $line-height-normal !important;
+    font-weight: $font-weight-normal !important;
+    color: $text-muted !important;
+}
+
+.label {
+    font-size: $font-size-sm !important;
+    line-height: $line-height-normal !important;
+    font-weight: $font-weight-medium !important;
+}
+
+// Japanese Text Specific Utilities
+.text-japanese {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif !important;
+    font-feature-settings: "palt" 1 !important; // Proportional alternate widths for better Japanese text
+}
+
+.text-japanese-vertical {
+    writing-mode: vertical-rl !important;
+    text-orientation: mixed !important;
+}

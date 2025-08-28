@@ -1,0 +1,70 @@
+/*
+ * Design Tokens - Spacing
+ * 
+ * Consistent spacing scale based on 4px grid system
+ * Used for margins, padding, gaps, and positioning
+ */
+
+// Base Spacer Unit
+$spacer: 1rem; // 16px
+
+// Spacing Scale (based on 0.25rem = 4px increments)
+$spacing-0: 0;
+$spacing-1: $spacer * 0.25; // 4px
+$spacing-2: $spacer * 0.5; // 8px
+$spacing-3: $spacer * 0.75; // 12px
+$spacing-4: $spacer; // 16px
+$spacing-5: $spacer * 1.25; // 20px
+$spacing-6: $spacer * 1.5; // 24px
+$spacing-8: $spacer * 2; // 32px
+$spacing-10: $spacer * 2.5; // 40px
+$spacing-12: $spacer * 3; // 48px
+$spacing-16: $spacer * 4; // 64px
+$spacing-20: $spacer * 5; // 80px
+$spacing-24: $spacer * 6; // 96px
+$spacing-32: $spacer * 8; // 128px
+
+// Spacing Map for Utility Generation
+$spacers: (
+    0: $spacing-0,
+    1: $spacing-1,
+    2: $spacing-2,
+    3: $spacing-3,
+    4: $spacing-4,
+    5: $spacing-5,
+    6: $spacing-6,
+    8: $spacing-8,
+    10: $spacing-10,
+    12: $spacing-12,
+    16: $spacing-16,
+    20: $spacing-20,
+    24: $spacing-24,
+    32: $spacing-32
+);
+
+// Component Specific Spacing
+$component-padding-sm: $spacing-2 $spacing-3; // 8px 12px
+$component-padding-base: $spacing-3 $spacing-4; // 12px 16px
+$component-padding-lg: $spacing-4 $spacing-6; // 16px 24px
+
+// Form Element Spacing
+$form-group-margin-bottom: $spacing-5; // 20px
+$form-label-margin-bottom: $spacing-2; // 8px
+$input-padding-y: $spacing-3; // 12px
+$input-padding-x: $spacing-4; // 16px
+
+// Card Spacing
+$card-padding: $spacing-6; // 24px
+$card-header-padding: $spacing-4 $spacing-6; // 16px 24px
+$card-body-padding: $spacing-6; // 24px
+
+// Layout Spacing
+$header-height: 64px;
+$sidebar-width: 240px;
+$content-padding: $spacing-8; // 32px
+$section-spacing: $spacing-12; // 48px
+
+// Grid Gaps
+$grid-gap-sm: $spacing-3; // 12px
+$grid-gap-base: $spacing-4; // 16px
+$grid-gap-lg: $spacing-6; // 24px

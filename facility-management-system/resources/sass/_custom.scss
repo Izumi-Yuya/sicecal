@@ -1273,3 +1273,937 @@ body {
         margin-bottom: 0.75rem;
     }
 }
+
+/*
+
+ * 施設詳細・編集画面スタイル
+ * 
+ * 【概要】
+ * 9つのタブ構造による施設情報表示・編集フォーム
+ * 各タブ内のドロップダウンによる分類表示
+ * 入力例表示機能とプレースホルダー実装
+ * 自動計算機能の表示
+ * ロール別操作ボタンの表示制御
+ */
+
+// Facility Detail Tabs
+.facility-tabs {
+    .nav-tabs {
+        border-bottom: 2px solid #e9ecef;
+        margin-bottom: 1.5rem;
+
+        .nav-link {
+            border: none;
+            border-radius: 8px 8px 0 0;
+            color: #6c757d;
+            font-weight: 500;
+            padding: 0.75rem 1rem;
+            margin-right: 0.25rem;
+            transition: all 0.2s ease;
+
+            &:hover {
+                border-color: transparent;
+                color: #495057;
+                background-color: #f8f9fa;
+            }
+
+            &.active {
+                color: #00B4E3;
+                background-color: white;
+                border-bottom: 2px solid #00B4E3;
+                font-weight: 600;
+            }
+
+            i {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .tab-content {
+        .tab-pane {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Form Display/Edit Toggle
+.form-display {
+    min-height: 1.5rem;
+    padding: 0.375rem 0;
+    color: #495057;
+    font-weight: 500;
+
+    &:empty::before {
+        content: "未設定";
+        color: #6c757d;
+        font-style: italic;
+    }
+}
+
+.form-edit {
+    transition: all 0.2s ease;
+
+    &:focus {
+        border-color: #00B4E3;
+        box-shadow: 0 0 0 0.2rem rgba(0, 180, 227, 0.25);
+    }
+}
+
+// Auto-calculated fields
+.text-info {
+    color: #00B4E3 !important;
+    font-weight: 600;
+
+    &::before {
+        content: "🔄 ";
+        font-size: 0.8rem;
+    }
+}
+
+// Accordion sections for utilities and other dropdowns
+.accordion {
+    .accordion-item {
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .accordion-header {
+            .accordion-button {
+                background-color: #f8f9fa;
+                color: #495057;
+                font-weight: 600;
+                border-radius: 8px;
+                padding: 1rem 1.25rem;
+
+                &:not(.collapsed) {
+                    background-color: #e3f2fd;
+                    color: #00B4E3;
+                    box-shadow: none;
+                }
+
+                &:focus {
+                    border-color: #00B4E3;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 180, 227, 0.25);
+                }
+
+                i {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+
+        .accordion-body {
+            padding: 1.25rem;
+            background-color: white;
+        }
+    }
+}
+
+// Role-based button visibility
+.role-buttons {
+    .btn-group {
+        .btn {
+            border-radius: 6px;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            i {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+// File upload areas
+.file-upload-area {
+    border: 2px dashed #e9ecef;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    background-color: #f8f9fa;
+
+    &:hover {
+        border-color: #00B4E3;
+        background-color: rgba(0, 180, 227, 0.05);
+    }
+
+    i {
+        font-size: 3rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+    }
+
+    h6 {
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: #6c757d;
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        border-radius: 6px;
+        font-weight: 500;
+    }
+}
+
+// Document list styling
+.document-list {
+    .list-group-item {
+        border: 1px solid #e9ecef;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: #f8f9fa;
+            border-color: #00B4E3;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .document-icon {
+            font-size: 1.2rem;
+            margin-right: 0.75rem;
+
+            &.text-danger {
+                color: #dc3545 !important;
+            }
+
+            &.text-primary {
+                color: #0d6efd !important;
+            }
+
+            &.text-success {
+                color: #198754 !important;
+            }
+        }
+
+        .document-info {
+            flex: 1;
+
+            .document-name {
+                font-weight: 600;
+                color: #495057;
+                margin-bottom: 0.25rem;
+            }
+
+            .document-meta {
+                font-size: 0.85rem;
+                color: #6c757d;
+            }
+        }
+
+        .document-actions {
+            .btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.8rem;
+                border-radius: 4px;
+                margin-left: 0.25rem;
+            }
+        }
+    }
+}
+
+// Input formatting helpers
+.input-group {
+    .input-group-text {
+        background-color: #f8f9fa;
+        border-color: #ced4da;
+        color: #6c757d;
+        font-weight: 500;
+    }
+}
+
+// Validation styling
+.is-invalid {
+    border-color: #dc3545;
+
+    &:focus {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #dc3545;
+}
+
+.is-valid {
+    border-color: #198754;
+
+    &:focus {
+        border-color: #198754;
+        box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+    }
+}
+
+.valid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #198754;
+}
+
+// Breadcrumb styling
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 1rem;
+
+    .breadcrumb-item {
+        font-size: 0.9rem;
+
+        a {
+            color: #00B4E3;
+            text-decoration: none;
+
+            &:hover {
+                color: #0099cc;
+                text-decoration: underline;
+            }
+        }
+
+        &.active {
+            color: #6c757d;
+        }
+
+        &::before {
+            color: #6c757d;
+        }
+    }
+}
+
+// Page header styling
+.page-header {
+    margin-bottom: 2rem;
+
+    h1 {
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 0;
+
+        i {
+            color: #00B4E3;
+            font-size: 0.9em;
+        }
+    }
+}
+
+// Success/Error messages
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 0.75rem 1rem;
+
+    &.alert-success {
+        background-color: rgba(25, 135, 84, 0.1);
+        color: #0f5132;
+        border-left: 4px solid #198754;
+    }
+
+    &.alert-danger {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: #842029;
+        border-left: 4px solid #dc3545;
+    }
+
+    &.alert-warning {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #664d03;
+        border-left: 4px solid #ffc107;
+    }
+
+    &.alert-info {
+        background-color: rgba(13, 202, 240, 0.1);
+        color: #055160;
+        border-left: 4px solid #0dcaf0;
+    }
+}
+
+// Loading states
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #00B4E3;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// Responsive adjustments for facility detail
+@media (max-width: 768px) {
+    .facility-tabs {
+        .nav-tabs {
+            flex-wrap: wrap;
+
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.75rem;
+                margin-bottom: 0.25rem;
+
+                i {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+
+    .role-buttons {
+        .btn-group {
+            flex-direction: column;
+            width: 100%;
+
+            .btn {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+                border-radius: 6px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .accordion {
+        .accordion-header {
+            .accordion-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .accordion-body {
+            padding: 1rem;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .btn-group {
+            flex-direction: column;
+            width: 100%;
+            margin-top: 1rem;
+
+            .btn {
+                margin-bottom: 0.5rem;
+                border-radius: 6px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .facility-tabs {
+        .nav-tabs {
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
+
+                span {
+                    display: none;
+                }
+
+                i {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+
+        .form-label {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+// Print styles for facility details
+@media print {
+    .facility-tabs {
+        .nav-tabs {
+            display: none;
+        }
+
+        .tab-content {
+            .tab-pane {
+                display: block !important;
+                opacity: 1 !important;
+            }
+        }
+    }
+
+    .role-buttons,
+    .form-edit,
+    .btn {
+        display: none !important;
+    }
+
+    .form-display {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .accordion {
+        .accordion-button {
+            display: none;
+        }
+
+        .accordion-collapse {
+            display: block !important;
+        }
+    }
+}
+
+/*
+
+ * 施設一覧画面スタイル
+ * 
+ * 【概要】
+ * シンプルな施設コードと施設名のリスト表示
+ * クリック可能な行とホバー効果
+ */
+
+// Facility List Specific Styles
+.facility-list {
+    .table {
+        .facility-row {
+            transition: all 0.2s ease;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f8f9fa !important;
+                transform: translateX(2px);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            td {
+                vertical-align: middle;
+                padding: 1rem 0.75rem;
+                border-bottom: 1px solid #e9ecef;
+
+                &:first-child {
+                    padding-left: 1.25rem;
+                }
+
+                &:last-child {
+                    padding-right: 1.25rem;
+                }
+
+                code {
+                    font-size: 0.9rem;
+                    padding: 0.25rem 0.5rem;
+                    background-color: rgba(0, 180, 227, 0.1);
+                    border: 1px solid rgba(0, 180, 227, 0.2);
+                    border-radius: 4px;
+                }
+
+                strong {
+                    font-weight: 600;
+                    color: #2c3e50;
+                }
+
+                .badge {
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    padding: 0.35rem 0.65rem;
+                    border-radius: 0.375rem;
+
+                    &.bg-light {
+                        background-color: #f8f9fa !important;
+                        color: #495057 !important;
+                        border: 1px solid #e9ecef;
+                    }
+                }
+            }
+        }
+
+        thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            font-weight: 600;
+            color: #495057;
+            padding: 1rem 0.75rem;
+
+            &:first-child {
+                padding-left: 1.25rem;
+            }
+
+            &:last-child {
+                padding-right: 1.25rem;
+            }
+        }
+    }
+}
+
+// Search form enhancements
+.facility-search {
+    .form-control {
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        transition: all 0.2s ease;
+
+        &:focus {
+            border-color: #00B4E3;
+            box-shadow: 0 0 0 0.2rem rgba(0, 180, 227, 0.25);
+        }
+    }
+
+    .form-select {
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        transition: all 0.2s ease;
+
+        &:focus {
+            border-color: #00B4E3;
+            box-shadow: 0 0 0 0.2rem rgba(0, 180, 227, 0.25);
+        }
+    }
+
+    .btn {
+        border-radius: 6px;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+
+        &.btn-primary {
+            background-color: #00B4E3;
+            border-color: #00B4E3;
+
+            &:hover {
+                background-color: #0099cc;
+                border-color: #0099cc;
+            }
+        }
+    }
+}
+
+// Results summary styling
+.results-summary {
+    .text-muted {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .btn-group {
+        .btn {
+            font-size: 0.85rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 4px;
+
+            i {
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+// Empty state styling
+.empty-state {
+    padding: 3rem 2rem;
+    text-align: center;
+
+    i {
+        font-size: 4rem;
+        color: #6c757d;
+        margin-bottom: 1.5rem;
+        opacity: 0.5;
+    }
+
+    h5 {
+        color: #6c757d;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: #adb5bd;
+        font-size: 0.9rem;
+    }
+}
+
+// Responsive adjustments for facility list
+@media (max-width: 768px) {
+    .facility-list {
+        .table {
+            font-size: 0.9rem;
+
+            .facility-row {
+                td {
+                    padding: 0.75rem 0.5rem;
+
+                    &:first-child {
+                        padding-left: 0.75rem;
+                    }
+
+                    &:last-child {
+                        padding-right: 0.75rem;
+                    }
+
+                    code {
+                        font-size: 0.8rem;
+                        padding: 0.2rem 0.4rem;
+                    }
+                }
+            }
+
+            thead th {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.9rem;
+
+                &:first-child {
+                    padding-left: 0.75rem;
+                }
+
+                &:last-child {
+                    padding-right: 0.75rem;
+                }
+            }
+        }
+    }
+
+    .facility-search {
+        .row {
+
+            .col-md-8,
+            .col-md-4 {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .results-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+
+        .btn-group {
+            width: 100%;
+
+            .btn {
+                flex: 1;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .facility-list {
+        .table-responsive {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table {
+            margin-bottom: 0;
+
+            .facility-row {
+                &:hover {
+                    transform: none;
+                    box-shadow: none;
+                }
+
+                td {
+                    padding: 1rem 0.75rem;
+
+                    &:first-child {
+                        padding-left: 1rem;
+                    }
+
+                    &:last-child {
+                        padding-right: 1rem;
+                    }
+                }
+            }
+
+            thead th {
+                padding: 0.75rem;
+
+                &:first-child {
+                    padding-left: 1rem;
+                }
+
+                &:last-child {
+                    padding-right: 1rem;
+                }
+            }
+        }
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+}
+
+// Tab category filter styles
+.nav-tabs .nav-item .d-flex {
+    .nav-link {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .dropdown {
+        .btn {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: 0;
+            height: 100%;
+
+            &:hover {
+                background-color: var(--bs-secondary-bg);
+            }
+        }
+    }
+}
+
+// Section visibility animation
+.utilities-section,
+.security-section,
+.contracts-section,
+.blueprints-section,
+.maintenance-section {
+    transition: opacity 0.3s ease-in-out;
+    margin-bottom: 2rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Category filter indicator
+.card-header small {
+    font-weight: 500;
+    color: var(--bs-primary) !important;
+}
+
+//
+Category tabs styles .nav-pills {
+    .nav-link {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+        margin: 0.125rem;
+        border-radius: 0.375rem;
+        transition: all 0.15s ease-in-out;
+
+        &:hover {
+            background-color: var(--bs-primary-bg-subtle);
+            color: var(--bs-primary);
+        }
+
+        &.active {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+
+        i {
+            font-size: 0.875rem;
+        }
+    }
+
+    &.flex-wrap {
+        .nav-item {
+            flex: 0 0 auto;
+            margin-bottom: 0.25rem;
+        }
+    }
+}
+
+// Section visibility animation
+.utilities-section,
+.security-section,
+.contracts-section,
+.blueprints-section,
+.maintenance-section {
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 2rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Card header spacing for category tabs
+.card-header {
+    .nav-pills {
+        margin-bottom: 0;
+    }
+}

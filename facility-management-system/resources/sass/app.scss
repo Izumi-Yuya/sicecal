@@ -1,8 +1,43 @@
-// Variables
+/*
+ * Shise-Cal Design System
+ * 
+ * Main SCSS entry point for the facility management system
+ * Imports design tokens, base styles, components, and patterns
+ */
+
+// Design Tokens
+@import 'tokens/colors';
+@import 'tokens/typography';
+@import 'tokens/spacing';
+@import 'tokens/shadows';
+@import 'tokens/borders';
+
+// Bootstrap Variable Overrides (using design tokens)
 @import 'variables';
 
-// Bootstrap
+// Bootstrap Framework
 @import 'bootstrap/scss/bootstrap';
 
-// Custom styles
+// Base Styles
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/forms';
+
+// Components
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/alerts';
+@import 'components/navigation';
+
+// Layout Patterns
+@import 'patterns/layout';
+
+// Utilities
+@import 'utilities/spacing';
+@import 'utilities/colors';
+@import 'utilities/typography';
+@import 'utilities/borders';
+@import 'utilities/shadows';
+
+// Legacy Custom Styles (preserved for compatibility)
 @import 'custom';
