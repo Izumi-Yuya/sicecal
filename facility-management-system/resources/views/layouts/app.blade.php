@@ -46,13 +46,7 @@
                             <div class="dropdown">
                                 <button class="btn approver-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     @php $user = session('user'); @endphp
-                                    @if($user['role'] === 'approver')
-                                        承認者 {{ $user['name'] }}
-                                    @elseif($user['role'] === 'facility')
-                                        {{ $user['name'] }}
-                                    @else
-                                        {{ $user['name'] }}
-                                    @endif
+                                    {{ $user['name'] }}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
@@ -78,41 +72,7 @@
 
         <div class="shise-main-container">
             <!-- Sidebar -->
-            <nav class="shise-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
-                <div class="offcanvas-header d-lg-none">
-                    <h5 class="offcanvas-title" id="sidebarLabel">メニュー</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close"></button>
-                </div>
-                
-                <div class="offcanvas-body p-0">
-                    <ul class="nav flex-column shise-nav">
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                                <i class="bi bi-house-door me-2"></i>
-                                HOME
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('facilities') ? 'active' : '' }}" href="#">
-                                <i class="bi bi-list-ul me-2"></i>
-                                施設一覧
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('facilities/create') ? 'active' : '' }}" href="#">
-                                <i class="bi bi-plus-circle me-2"></i>
-                                施設登録
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('facilities/register') ? 'active' : '' }}" href="#">
-                                <i class="bi bi-plus-square me-2"></i>
-                                施設登録
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            @include('partials.sidebar')
 
             <!-- Main Content -->
             <main class="shise-content">
@@ -152,9 +112,6 @@
     </div>
 
     @stack('scripts')
-    
-    <!-- Static Site JavaScript for GitHub Pages -->
-    <script src="{{ asset('js/static-site.js') }}"></script>
     
     <!-- Bootstrap JavaScript for dropdown functionality -->
     <script>

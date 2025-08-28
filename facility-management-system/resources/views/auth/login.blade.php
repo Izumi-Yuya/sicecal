@@ -92,6 +92,13 @@
                 <button type="submit" class="login-button">
                     LOGIN
                 </button>
+                
+                <!-- Password Reset Link -->
+                <div class="text-center mt-3">
+                    <a href="{{ route('password.request') }}" class="text-decoration-none text-muted">
+                        <i class="bi bi-key me-1"></i>パスワードを忘れた方はこちら
+                    </a>
+                </div>
             </form>
         </div>
     </div>

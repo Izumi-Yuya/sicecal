@@ -34,12 +34,7 @@ Route::get('/', function () {
 });
 
 // Dashboard route - require login
-Route::get('/dashboard', function () {
-    if (!session('user')) {
-        return redirect('/')->with('error', 'ログインが必要です');
-    }
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/test-bootstrap', function () {
     return view('test-bootstrap');
@@ -103,5 +98,62 @@ Route::post('/login', function (Illuminate\Http\Request $request) {
 
 Route::post('/logout', function () {
     session()->forget('user');
-    return redirect('/')->with('success', 'ログアウトしました');
+    return redirect()->route('login')->with('success', 'ログアウトしました');
 })->name('logout');
+
+// Password Reset Routes
+Route::get('/password/reset', function () {
+    return view('auth.passwords.email');
+})->name('password.request');
+
+Route::post('/password/email', function (Illuminate\Http\Request $request) {
+    /*
+     * パスワードリセットリンク送信処理（デモ用）
+     * 
+     * 【機能】
+     * - メールアドレスの検証
+     * - リセットリンクの生成（デモでは画面表示のみ）
+     * - 実際の運用では Laravel の Password::sendResetLink を使用
+     */
+    $request->validate([
+        'email' => 'required|email'
+    ], [
+        'email.required' => 'メールアドレスを入力してください',
+        'email.email' => '有効なメールアドレスを入力してください'
+    ]);
+    
+    // デモ用：実際にはメール送信処理を行う
+    return back()->with('status', 'パスワードリセットリンクをメールで送信しました。（デモ環境のため実際には送信されません）');
+})->name('password.email');
+
+Route::get('/password/reset/{token}', function ($token) {
+    return view('auth.passwords.reset', [
+        'token' => $token,
+        'email' => request('email')
+    ]);
+})->name('password.reset');
+
+Route::post('/password/reset', function (Illuminate\Http\Request $request) {
+    /*
+     * パスワードリセット処理（デモ用）
+     * 
+     * 【機能】
+     * - トークンの検証
+     * - パスワードの更新
+     * - 実際の運用では Laravel の Password::reset を使用
+     */
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed'
+    ], [
+        'email.required' => 'メールアドレスを入力してください',
+        'email.email' => '有効なメールアドレスを入力してください',
+        'password.required' => 'パスワードを入力してください',
+        'password.min' => 'パスワードは8文字以上で入力してください',
+        'password.confirmed' => 'パスワード確認が一致しません'
+    ]);
+    
+    // デモ用：実際にはパスワード更新処理を行う
+    return redirect()->route('login')->with('success', 'パスワードが正常にリセットされました。新しいパスワードでログインしてください。');
+})->name('password.update');
