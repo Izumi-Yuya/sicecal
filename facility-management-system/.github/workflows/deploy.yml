@@ -67,33 +67,6 @@ jobs:
       run: |
         # Use the custom artisan command to generate static pages
         php artisan site:generate --output=../docs
-        
-        # Create index.html that redirects to login
-        cat > ../docs/index.html << 'EOF'
-        <!DOCTYPE html>
-        <html lang="ja">
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Shise-Cal - 施設管理システム</title>
-            <meta http-equiv="refresh" content="0; url=./login.html">
-            <link rel="canonical" href="./login.html">
-            <style>
-                body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-                .loading { font-size: 18px; color: #666; }
-                a { color: #007bff; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-            </style>
-        </head>
-        <body>
-            <div class="loading">
-                <h1>Shise-Cal 施設管理システム</h1>
-                <p>ログインページにリダイレクトしています...</p>
-                <p><a href="./login.html">こちらをクリックしてログインページへ</a></p>
-            </div>
-        </body>
-        </html>
-        EOF
 
     - name: List generated files
       run: |
