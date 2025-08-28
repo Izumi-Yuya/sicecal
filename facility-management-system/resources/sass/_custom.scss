@@ -1,0 +1,158 @@
+// Custom styles for Facility Management System
+
+// Layout
+.main-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+// Sidebar
+.sidebar {
+    min-height: calc(100vh - 56px);
+    background-color: $light;
+    border-right: 1px solid $border-color;
+}
+
+.sidebar .nav-link {
+    color: $dark;
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+
+    &:hover {
+        background-color: rgba($primary, 0.1);
+        color: $primary;
+    }
+
+    &.active {
+        background-color: $primary;
+        color: white;
+    }
+}
+
+// Cards
+.card {
+    box-shadow: $box-shadow-sm;
+    border: $card-border-width solid $card-border-color;
+
+    .card-header {
+        background-color: $light;
+        border-bottom: 1px solid $card-border-color;
+        font-weight: 600;
+    }
+}
+
+// Tables
+.table {
+    th {
+        background-color: $light;
+        border-bottom: 2px solid $border-color;
+        font-weight: 600;
+    }
+}
+
+// Forms
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.required::after {
+    content: " *";
+    color: $danger;
+}
+
+// Buttons
+.btn {
+    font-weight: 500;
+
+    &.btn-sm {
+        font-size: 0.8rem;
+    }
+}
+
+// Alerts
+.alert {
+    border: none;
+    border-left: 4px solid;
+
+    &.alert-primary {
+        border-left-color: $primary;
+    }
+
+    &.alert-success {
+        border-left-color: $success;
+    }
+
+    &.alert-warning {
+        border-left-color: $warning;
+    }
+
+    &.alert-danger {
+        border-left-color: $danger;
+    }
+}
+
+// Utilities
+.text-muted {
+    color: $secondary !important;
+}
+
+.border-start {
+    border-left: 1px solid $border-color !important;
+}
+
+// Loading states
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+// File upload
+.file-upload-area {
+    border: 2px dashed $border-color;
+    border-radius: $border-radius;
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.15s ease-in-out;
+
+    &:hover {
+        border-color: $primary;
+    }
+
+    &.dragover {
+        border-color: $primary;
+        background-color: rgba($primary, 0.05);
+    }
+}
+
+// Status badges
+.status-badge {
+    &.status-pending {
+        background-color: $warning;
+    }
+
+    &.status-approved {
+        background-color: $success;
+    }
+
+    &.status-rejected {
+        background-color: $danger;
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+
+    .content-wrapper {
+        padding: 1rem 0;
+    }
+}
