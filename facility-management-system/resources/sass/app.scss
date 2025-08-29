@@ -11,6 +11,7 @@
 @import 'tokens/spacing';
 @import 'tokens/shadows';
 @import 'tokens/borders';
+@import 'tokens/breakpoints';
 
 // Bootstrap Variable Overrides (using design tokens)
 @import 'variables';
@@ -26,12 +27,17 @@
 // Components
 @import 'components/buttons';
 @import 'components/forms';
+@import 'components/form-interactions';
+@import 'components/component-state';
 @import 'components/cards';
 @import 'components/alerts';
 @import 'components/navigation';
 
 // Layout Patterns
 @import 'patterns/layout';
+@import 'patterns/desktop-layouts';
+@import 'patterns/desktop-interactions';
+@import 'patterns/data-tables';
 @import 'patterns/facility-forms';
 @import 'patterns/dashboard';
 
@@ -41,6 +47,7 @@
 @import 'utilities/typography';
 @import 'utilities/borders';
 @import 'utilities/shadows';
+@import 'utilities/accessibility';
 
 // Legacy Custom Styles (preserved for compatibility)
 @import 'custom';

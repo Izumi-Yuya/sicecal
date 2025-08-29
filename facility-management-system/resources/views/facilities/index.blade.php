@@ -11,7 +11,7 @@
         </h1>
         
         @php $user = session('user'); @endphp
-        @if($user && in_array($user['role'], ['system_admin', 'editor']))
+        @if($user && in_array((is_array($user) ? $user['role'] : $user->role), ['system_admin', 'editor']))
             <a href="{{ route('facilities.create') }}" class="btn btn-primary">
                 <i class="bi bi-plus-circle me-2"></i>新規登録
             </a>
@@ -102,7 +102,7 @@
             @endif
         </div>
         
-        @if($user && in_array($user['role'], ['viewer_executive', 'viewer_department', 'viewer_district']))
+        @if($user && in_array((is_array($user) ? $user['role'] : $user->role), ['viewer_executive', 'viewer_department', 'viewer_district']))
             <div class="btn-group">
                 <button type="button" class="btn btn-outline-success btn-sm">
                     <i class="bi bi-file-earmark-spreadsheet me-1"></i>CSV出力
@@ -119,7 +119,7 @@
         <div class="card-body p-0">
             @if($facilities->count() > 0)
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0">
+                    <table class="table data-table table-hover mb-0">
                         <thead class="table-light">
                             <tr>
                                 <th width="30%">施設コード</th>

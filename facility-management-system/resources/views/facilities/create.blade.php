@@ -26,7 +26,7 @@
     <!-- Registration Form -->
     <div class="card">
         <div class="card-body">
-            <form method="POST" action="{{ route('facilities.store') }}">
+            <form method="POST" action="{{ route('facilities.store') }}" data-enhanced-validation>
                 @csrf
                 
                 <div class="row">

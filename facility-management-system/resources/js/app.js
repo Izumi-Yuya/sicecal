@@ -6,6 +6,24 @@ import '../sass/app.scss';
 // Import form utilities
 import './form-utilities';
 
+// Import enhanced form interactions
+import './form-interactions';
+
+// Import component state management
+import './component-state-management';
+
+// Import desktop enhancements
+import './desktop-enhancements';
+
+// Import data table utilities
+import './data-table-utils';
+
+// Import desktop interactions
+import './desktop-interactions';
+
+// Import accessibility utilities
+import './accessibility-utils';
+
 // Custom JavaScript for the application
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Bootstrap components

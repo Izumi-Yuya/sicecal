@@ -6,6 +6,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Shise-Cal') }}@hasSection('title') - @yield('title')@endif</title>
+    
+    <!-- Accessibility meta tags -->
+    <meta name="description" content="施設管理システム - 施設情報の一元管理">
+    <meta name="theme-color" content="#00B4E3">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,25 +22,32 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    <!-- Skip links for keyboard navigation -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    <a href="#sidebar-nav" class="skip-link">ナビゲーションへスキップ</a>
+    
     <div class="shise-cal-layout">
         <!-- Header -->
-        <header class="shise-header">
+        <header class="shise-header" role="banner">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- Logo -->
                     <div class="shise-logo">
-                        <img src="{{ asset('images/shise-cal-logo.png') }}" alt="Shise-Cal" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="logo-fallback" style="display: none;">
-                            <div class="logo-icon">
-                                <i class="bi bi-building-fill"></i>
+                        <a href="{{ route('dashboard') }}" aria-label="Shise-Cal ホームページに戻る">
+                            <img src="{{ asset('images/shise-cal-logo.png') }}" alt="Shise-Cal ロゴ" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="logo-fallback" style="display: none;">
+                                <div class="logo-icon">
+                                    <i class="bi bi-building-fill" aria-hidden="true"></i>
+                                </div>
+                                <span class="logo-text">Shise-Cal</span>
                             </div>
-                            <span class="logo-text">Shise-Cal</span>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Mobile Menu Toggle -->
-                    <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-                        <i class="bi bi-list"></i>
+                    <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="ナビゲーションメニューを開く">
+                        <i class="bi bi-list" aria-hidden="true"></i>
+                        <span class="sr-only">メニュー</span>
                     </button>
 
                     <!-- User/Approver Section -->
@@ -46,7 +57,7 @@
                             <div class="dropdown">
                                 <button class="btn approver-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     @php $user = session('user'); @endphp
-                                    {{ $user['name'] }}
+                                    {{ is_array($user) ? $user['name'] : $user->name }}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
@@ -75,33 +86,33 @@
             @include('partials.sidebar')
 
             <!-- Main Content -->
-            <main class="shise-content">
-                <!-- Alert Messages -->
+            <main class="shise-content" id="main-content" role="main" tabindex="-1">
+                <!-- Alert Messages - Using Design System Alert Components -->
                 @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" aria-live="polite">
+                        <i class="bi bi-check-circle me-2" aria-hidden="true"></i>{{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="成功メッセージを閉じる"></button>
                     </div>
                 @endif
 
                 @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-triangle me-2"></i>{{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" aria-live="assertive">
+                        <i class="bi bi-exclamation-triangle me-2" aria-hidden="true"></i>{{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="エラーメッセージを閉じる"></button>
                     </div>
                 @endif
 
                 @if (session('warning'))
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-triangle me-2"></i>{{ session('warning') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-live="polite">
+                        <i class="bi bi-exclamation-triangle me-2" aria-hidden="true"></i>{{ session('warning') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="警告メッセージを閉じる"></button>
                     </div>
                 @endif
 
                 @if (session('info'))
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <i class="bi bi-info-circle me-2"></i>{{ session('info') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert alert-info alert-dismissible fade show" role="alert" aria-live="polite">
+                        <i class="bi bi-info-circle me-2" aria-hidden="true"></i>{{ session('info') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="情報メッセージを閉じる"></button>
                     </div>
                 @endif
 

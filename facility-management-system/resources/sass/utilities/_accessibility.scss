@@ -1,0 +1,226 @@
+// Accessibility Utilities
+// Focus indicators, ARIA support, and screen reader utilities
+
+// Focus indicators for all interactive elements
+.focus-visible,
+*:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+// Enhanced focus indicators for specific components
+.btn:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+.form-control:focus-visible,
+.form-select:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 1px;
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+.nav-link:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.card:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+}
+
+// Skip links for keyboard navigation
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--bs-dark);
+    color: var(--bs-white);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 9999;
+
+    &:focus {
+        top: 6px;
+    }
+}
+
+// Screen reader only text
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+// Screen reader only text that becomes visible on focus
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: inherit !important;
+    margin: inherit !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid;
+    }
+
+    .card {
+        border: 2px solid var(--bs-border-color);
+    }
+
+    .form-control,
+    .form-select {
+        border: 2px solid var(--bs-border-color);
+    }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+// ARIA live regions
+.aria-live-polite {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+// Status indicators with screen reader text
+.status-indicator {
+    position: relative;
+
+    &::after {
+        content: attr(data-status-text);
+        @extend .sr-only;
+    }
+
+    &.status-success::before {
+        content: "✓";
+        color: var(--bs-success);
+        margin-right: 0.25rem;
+    }
+
+    &.status-warning::before {
+        content: "⚠";
+        color: var(--bs-warning);
+        margin-right: 0.25rem;
+    }
+
+    &.status-error::before {
+        content: "✗";
+        color: var(--bs-danger);
+        margin-right: 0.25rem;
+    }
+}
+
+// Keyboard navigation helpers
+.keyboard-focusable {
+    &:focus-visible {
+        outline: 2px solid var(--bs-primary);
+        outline-offset: 2px;
+    }
+}
+
+// Tab navigation indicators
+.tab-navigation {
+    .nav-link {
+        position: relative;
+
+        &[aria-selected="true"]::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--bs-primary);
+        }
+    }
+}
+
+// Form validation accessibility
+.form-group {
+    .invalid-feedback {
+        display: block;
+
+        &::before {
+            content: "エラー: ";
+            font-weight: bold;
+        }
+    }
+
+    .valid-feedback {
+        display: block;
+
+        &::before {
+            content: "成功: ";
+            font-weight: bold;
+        }
+    }
+}
+
+// Loading state accessibility
+.loading-state {
+    position: relative;
+
+    &::after {
+        content: "読み込み中...";
+        @extend .sr-only;
+    }
+
+    &[aria-busy="true"] {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+}
+
+// Interactive element states
+.interactive-element {
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--bs-primary);
+        outline-offset: 2px;
+    }
+
+    &[aria-disabled="true"] {
+        cursor: not-allowed;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+}

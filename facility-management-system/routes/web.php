@@ -53,8 +53,7 @@ Route::post('/login', function (Illuminate\Http\Request $request) {
      * デモ用ログイン処理
      * 
      * 【機能】
-     * - 任意のユーザー名・パスワードを受け入れ
-     * - 役割選択必須（admin, manager, user, viewer）
+     * - 役割選択のみでログイン可能
      * - バリデーション機能付き
      * - セッションにユーザー情報を保存
      * 
@@ -65,14 +64,10 @@ Route::post('/login', function (Illuminate\Http\Request $request) {
      * - logged_in_at: ログイン時刻
      */
     $request->validate([
-        'user_type' => 'required|in:system_admin,editor,approver,viewer_executive,viewer_department,viewer_district,viewer_facility',
-        'name' => 'required|string|max:255',
-        'password' => 'required|min:1'
+        'role' => 'required|in:system_admin,editor,approver,viewer_executive,viewer_department,viewer_regional,viewer_facility',
     ], [
-        'user_type.required' => '役割を選択してください',
-        'user_type.in' => '有効な役割を選択してください',
-        'name.required' => 'ユーザー名を入力してください',
-        'password.required' => 'パスワードを入力してください'
+        'role.required' => '役割を選択してください',
+        'role.in' => '有効な役割を選択してください',
     ]);
     
     // Role display names - 要件定義に基づく7つのロール
@@ -82,19 +77,22 @@ Route::post('/login', function (Illuminate\Http\Request $request) {
         'approver' => '承認者',
         'viewer_executive' => '閲覧者（役員・本社）',
         'viewer_department' => '閲覧者（部門責任者）',
-        'viewer_district' => '閲覧者（地区担当）',
+        'viewer_regional' => '閲覧者（地区担当）',
         'viewer_facility' => '閲覧者（事業所）'
     ];
     
-    session(['user' => [
-        'name' => $request->name,
-        'role' => $request->user_type,
-        'role_display' => $roleNames[$request->user_type],
+    // Create user object with proper structure
+    $user = (object) [
+        'name' => 'デモユーザー',
+        'role' => $request->role,
+        'role_display' => $roleNames[$request->role],
         'logged_in_at' => now()
-    ]]);
+    ];
     
-    return redirect('/dashboard')->with('success', $roleNames[$request->user_type] . 'として' . $request->name . 'さんがログインしました');
-})->name('login.post');
+    session(['user' => $user]);
+    
+    return redirect('/dashboard')->with('success', $roleNames[$request->role] . 'としてログインしました');
+});
 
 Route::post('/logout', function () {
     session()->forget('user');

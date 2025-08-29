@@ -1,5 +1,5 @@
 <!-- Tab Navigation -->
-<ul class="nav nav-tabs mb-4" id="facilityTabs" role="tablist">
+<ul class="nav nav-tabs facility-tabs mb-4" id="facilityTabs" role="tablist">
     <li class="nav-item" role="presentation">
         <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab">
             <i class="bi bi-info-circle me-2"></i>基本情報

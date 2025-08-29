@@ -1,0 +1,462 @@
+/*
+ * Patterns - Desktop Layouts
+ * 
+ * Desktop-first responsive layouts optimized for facility management workflows
+ * Includes multi-column forms, enhanced tooltips, and keyboard shortcuts
+ */
+
+// Desktop-Optimized Form Layouts
+.desktop-form-layout {
+
+    // Default desktop layout (2-3 columns)
+    .form-row {
+        display: grid;
+        gap: $spacing-4 $spacing-6;
+        margin-bottom: $spacing-6;
+
+        // Desktop: 3-column layout for efficient data entry
+        @include desktop {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        // Large desktop: 4-column layout for wide screens
+        @include desktop-xl {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        // Tablet: 2-column layout
+        @include tablet-lg-down {
+            grid-template-columns: repeat(2, 1fr);
+            gap: $spacing-3 $spacing-4;
+        }
+
+        // Mobile: single column
+        @include tablet-down {
+            grid-template-columns: 1fr;
+            gap: $spacing-4;
+        }
+
+        // Column span utilities
+        .col-span-2 {
+            @include desktop {
+                grid-column: span 2;
+            }
+        }
+
+        .col-span-3 {
+            @include desktop {
+                grid-column: span 3;
+            }
+        }
+
+        .col-span-full {
+            grid-column: 1 / -1;
+        }
+    }
+
+    // Facility-specific form sections
+    .facility-basic-info {
+        .form-row {
+            @include desktop {
+                grid-template-columns: 2fr 1fr 1fr; // Name takes more space
+            }
+        }
+    }
+
+    .facility-contact-info {
+        .form-row {
+            @include desktop {
+                grid-template-columns: 1fr 1fr 2fr; // Address takes more space
+            }
+        }
+    }
+
+    .facility-land-info {
+        .form-row {
+            @include desktop {
+                grid-template-columns: repeat(4, 1fr); // Equal columns for measurements
+            }
+        }
+    }
+}
+
+// Multi-Column Form Patterns
+.multi-column-form {
+    display: grid;
+    gap: $spacing-8;
+
+    // Desktop: side-by-side sections
+    @include desktop {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    // Large desktop: three columns for complex forms
+    @include desktop-xl {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    // Tablet and below: stacked sections
+    @include tablet-lg-down {
+        grid-template-columns: 1fr;
+        gap: $spacing-6;
+    }
+
+    .form-section {
+        background: $white;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-lg;
+        padding: $spacing-6;
+        box-shadow: $shadow-sm;
+
+        .section-header {
+            margin-bottom: $spacing-4;
+            padding-bottom: $spacing-3;
+            border-bottom: 1px solid $border-light;
+
+            h3 {
+                margin: 0;
+                font-size: $font-size-lg;
+                font-weight: $font-weight-semibold;
+                color: $text-primary;
+            }
+        }
+    }
+}
+
+// Desktop-Specific Enhancements
+@include desktop {
+
+    // Enhanced tooltips for desktop users
+    .desktop-tooltip {
+        position: relative;
+        cursor: help;
+
+        &::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: $overlay-dark;
+            color: $white;
+            padding: $spacing-2 $spacing-3;
+            border-radius: $border-radius-sm;
+            font-size: $font-size-xs;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: calc(100% - 5px);
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: $overlay-dark;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+
+        &:hover::after,
+        &:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // Keyboard shortcuts display
+    .keyboard-shortcuts {
+        position: fixed;
+        bottom: $spacing-6;
+        right: $spacing-6;
+        background: $overlay-dark;
+        color: $white;
+        padding: $spacing-4;
+        border-radius: $border-radius-md;
+        font-size: $font-size-sm;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        max-width: 300px;
+
+        &.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .shortcuts-header {
+            font-weight: $font-weight-semibold;
+            margin-bottom: $spacing-3;
+            padding-bottom: $spacing-2;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: $spacing-2;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .shortcut-keys {
+                display: flex;
+                gap: $spacing-1;
+
+                .key {
+                    background: rgba(255, 255, 255, 0.2);
+                    padding: 2px 6px;
+                    border-radius: $border-radius-xs;
+                    font-family: $font-family-monospace;
+                    font-size: $font-size-xs;
+                    min-width: 20px;
+                    text-align: center;
+                }
+            }
+
+            .shortcut-description {
+                margin-left: $spacing-3;
+                font-size: $font-size-xs;
+                opacity: 0.9;
+            }
+        }
+    }
+
+    // Desktop form enhancements
+    .desktop-form-enhancements {
+
+        // Enhanced focus indicators
+        .form-control,
+        .form-select {
+            &:focus {
+                box-shadow: $focus-shadow-primary, 0 0 0 3px rgba($primary, 0.1);
+                border-color: $primary;
+            }
+        }
+
+        // Hover states for form elements
+        .form-control:not(:disabled):not([readonly]):hover {
+            border-color: rgba($primary, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        // Enhanced button hover states
+        .btn {
+            transition: all 0.2s ease;
+
+            &:hover:not(:disabled) {
+                transform: translateY(-1px);
+                box-shadow: $shadow-md;
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    // Desktop data entry optimizations
+    .data-entry-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: $spacing-4 $spacing-6;
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        // Auto-calculation fields styling
+        .auto-calc-field {
+            position: relative;
+
+            .form-control[readonly] {
+                background-color: rgba($info, 0.1);
+                border-color: rgba($info, 0.3);
+                color: $info;
+                font-weight: $font-weight-medium;
+            }
+
+            .calc-indicator {
+                position: absolute;
+                right: $spacing-2;
+                top: 50%;
+                transform: translateY(-50%);
+                color: $info;
+                font-size: $font-size-xs;
+                pointer-events: none;
+            }
+        }
+    }
+
+    // Desktop-optimized tabs
+    .desktop-tabs {
+        .nav-tabs {
+            border-bottom: 2px solid $border-color;
+            margin-bottom: $spacing-6;
+
+            .nav-link {
+                padding: $spacing-3 $spacing-6;
+                border: none;
+                border-radius: $border-radius-md $border-radius-md 0 0;
+                font-weight: $font-weight-medium;
+                color: $text-secondary;
+                transition: all 0.2s ease;
+                position: relative;
+
+                &:hover {
+                    color: $primary;
+                    background-color: rgba($primary, 0.05);
+                }
+
+                &.active {
+                    color: $primary;
+                    background-color: $white;
+                    border-bottom: 2px solid $primary;
+                    font-weight: $font-weight-semibold;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        right: 0;
+                        height: 2px;
+                        background: $primary;
+                    }
+                }
+            }
+        }
+
+        .tab-content {
+            padding: $spacing-6;
+            background: $white;
+            border-radius: 0 $border-radius-md $border-radius-md $border-radius-md;
+            box-shadow: $shadow-sm;
+        }
+    }
+}
+
+// Desktop Layout Utilities
+.desktop-only {
+    @include tablet-lg-down {
+        display: none !important;
+    }
+}
+
+.desktop-hidden {
+    @include desktop {
+        display: none !important;
+    }
+}
+
+// Desktop-optimized spacing
+@include desktop {
+    .desktop-spacing {
+        .mb-desktop-lg {
+            margin-bottom: $spacing-8 !important;
+        }
+
+        .mt-desktop-lg {
+            margin-top: $spacing-8 !important;
+        }
+
+        .mx-desktop-lg {
+            margin-left: $spacing-8 !important;
+            margin-right: $spacing-8 !important;
+        }
+
+        .my-desktop-lg {
+            margin-top: $spacing-8 !important;
+            margin-bottom: $spacing-8 !important;
+        }
+
+        .pb-desktop-lg {
+            padding-bottom: $spacing-8 !important;
+        }
+
+        .pt-desktop-lg {
+            padding-top: $spacing-8 !important;
+        }
+
+        .px-desktop-lg {
+            padding-left: $spacing-8 !important;
+            padding-right: $spacing-8 !important;
+        }
+
+        .py-desktop-lg {
+            padding-top: $spacing-8 !important;
+            padding-bottom: $spacing-8 !important;
+        }
+    }
+}
+
+// Desktop content width optimization
+.desktop-content-width {
+    @include desktop {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    @include desktop-xl {
+        max-width: 1400px;
+    }
+}
+
+// Desktop form validation enhancements
+@include desktop {
+    .desktop-validation {
+        .is-invalid {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .invalid-feedback {
+            display: flex;
+            align-items: center;
+            gap: $spacing-2;
+
+            &::before {
+                content: '⚠';
+                color: $danger;
+                font-weight: bold;
+            }
+        }
+
+        .valid-feedback {
+            display: flex;
+            align-items: center;
+            gap: $spacing-2;
+
+            &::before {
+                content: '✓';
+                color: $success;
+                font-weight: bold;
+            }
+        }
+    }
+}

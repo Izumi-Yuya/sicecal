@@ -1,0 +1,651 @@
+/*
+ * Patterns - Desktop Interactions
+ * 
+ * Enhanced hover states, transitions, keyboard navigation, loading states,
+ * and focus management optimized for desktop usage
+ */
+
+// Enhanced Hover States for Desktop
+@include desktop {
+
+    // Button hover enhancements
+    .btn {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        &:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: $shadow-lg;
+
+            &::before {
+                left: 100%;
+            }
+        }
+
+        &:active {
+            transform: translateY(0);
+            transition-duration: 0.1s;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: $focus-shadow-primary, $shadow-md;
+        }
+    }
+
+    // Card hover enhancements
+    .card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: $shadow-xl;
+
+            .card-header {
+                background-color: rgba($primary, 0.05);
+            }
+        }
+
+        &.card-interactive {
+            cursor: pointer;
+
+            &:hover {
+                border-color: rgba($primary, 0.3);
+            }
+
+            &:active {
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    // Form control hover enhancements
+    .form-control,
+    .form-select {
+        transition: all 0.2s ease;
+
+        &:hover:not(:disabled):not([readonly]) {
+            border-color: rgba($primary, 0.4);
+            box-shadow: 0 0 0 0.1rem rgba($primary, 0.1);
+        }
+
+        &:focus {
+            transform: scale(1.02);
+            box-shadow: $focus-shadow-primary, 0 0 0 0.2rem rgba($primary, 0.1);
+        }
+    }
+
+    // Navigation link hover enhancements
+    .nav-link {
+        transition: all 0.2s ease;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: $primary;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        &:hover {
+            color: $primary;
+
+            &::after {
+                width: 80%;
+            }
+        }
+
+        &.active::after {
+            width: 100%;
+        }
+    }
+
+    // Table row hover enhancements
+    .table tbody tr {
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: rgba($primary, 0.08);
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    // Link hover enhancements
+    a:not(.btn):not(.nav-link) {
+        transition: all 0.2s ease;
+        position: relative;
+
+        &:hover {
+            color: $primary;
+            text-decoration: none;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: $primary;
+                animation: linkUnderline 0.3s ease;
+            }
+        }
+    }
+
+    @keyframes linkUnderline {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 100%;
+        }
+    }
+}
+
+// Keyboard Navigation Enhancements
+@include desktop {
+
+    // Enhanced focus indicators
+    .keyboard-navigation {
+        *:focus {
+            outline: 2px solid $primary;
+            outline-offset: 2px;
+            border-radius: $border-radius-sm;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: $primary;
+            box-shadow: $focus-shadow-primary, 0 0 0 0.2rem rgba($primary, 0.15);
+        }
+
+        .btn:focus {
+            outline: none;
+            box-shadow: $focus-shadow-primary, $shadow-md;
+        }
+    }
+
+    // Tab navigation improvements
+    .tab-navigation {
+        .nav-tabs .nav-link {
+            &:focus {
+                outline: 2px solid $primary;
+                outline-offset: -2px;
+                z-index: 1;
+            }
+        }
+    }
+
+    // Form navigation helpers
+    .form-navigation {
+        .form-group {
+            position: relative;
+
+            &.focused {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: -2px;
+                    left: -2px;
+                    right: -2px;
+                    bottom: -2px;
+                    border: 2px solid rgba($primary, 0.3);
+                    border-radius: $border-radius-md;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    // Skip navigation for accessibility
+    .skip-navigation {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: $primary;
+        color: $white;
+        padding: $spacing-2 $spacing-4;
+        border-radius: $border-radius-sm;
+        text-decoration: none;
+        z-index: 1000;
+        transition: top 0.3s ease;
+
+        &:focus {
+            top: 6px;
+        }
+    }
+}
+
+// Desktop Loading States and Progress Indicators
+@include desktop {
+
+    // Enhanced loading spinner
+    .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba($primary, 0.3);
+        border-radius: 50%;
+        border-top-color: $primary;
+        animation: spin 1s ease-in-out infinite;
+
+        &.loading-lg {
+            width: 40px;
+            height: 40px;
+            border-width: 4px;
+        }
+
+        &.loading-sm {
+            width: 16px;
+            height: 16px;
+            border-width: 1px;
+        }
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    // Button loading states
+    .btn-loading {
+        position: relative;
+        color: transparent !important;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        &:disabled {
+            opacity: 0.7;
+        }
+    }
+
+    // Form loading overlay
+    .form-loading {
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 10;
+            border-radius: inherit;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 32px;
+            height: 32px;
+            margin: -16px 0 0 -16px;
+            border: 3px solid rgba($primary, 0.3);
+            border-top-color: $primary;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 11;
+        }
+    }
+
+    // Progress bars
+    .progress-enhanced {
+        height: 8px;
+        background-color: rgba($primary, 0.1);
+        border-radius: $border-radius-sm;
+        overflow: hidden;
+
+        .progress-bar {
+            background: linear-gradient(90deg, $primary, lighten($primary, 10%));
+            transition: width 0.6s ease;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                animation: progressShimmer 2s infinite;
+            }
+        }
+    }
+
+    @keyframes progressShimmer {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(100%);
+        }
+    }
+}
+
+// Smooth Scrolling and Focus Management
+@include desktop {
+
+    // Smooth scrolling behavior
+    html {
+        scroll-behavior: smooth;
+    }
+
+    // Enhanced scroll-to-top button
+    .scroll-to-top {
+        position: fixed;
+        bottom: $spacing-6;
+        right: $spacing-6;
+        width: 50px;
+        height: 50px;
+        background: $primary;
+        color: $white;
+        border: none;
+        border-radius: 50%;
+        box-shadow: $shadow-lg;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+
+        &:hover {
+            background: darken($primary, 10%);
+            transform: translateY(-2px);
+            box-shadow: $shadow-xl;
+        }
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &::before {
+            content: '↑';
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    // Focus management for modals and overlays
+    .modal {
+        &.show {
+            .modal-dialog {
+                animation: modalSlideIn 0.3s ease;
+            }
+        }
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    // Enhanced dropdown animations
+    .dropdown-menu {
+        animation: dropdownFadeIn 0.2s ease;
+
+        &.show {
+            display: block;
+        }
+    }
+
+    @keyframes dropdownFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    // Tooltip enhancements
+    .tooltip {
+        animation: tooltipFadeIn 0.2s ease;
+    }
+
+    @keyframes tooltipFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}
+
+// Desktop-Specific Interaction Utilities
+@include desktop {
+
+    // Hover lift effect
+    .hover-lift {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: $shadow-lg;
+        }
+    }
+
+    // Hover glow effect
+    .hover-glow {
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 0 20px rgba($primary, 0.3);
+        }
+    }
+
+    // Hover scale effect
+    .hover-scale {
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    // Interactive feedback
+    .interactive-feedback {
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba($primary, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        &:active::after {
+            width: 300px;
+            height: 300px;
+        }
+    }
+
+    // Pulse animation for notifications
+    .pulse-notification {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba($primary, 0.7);
+        }
+
+        70% {
+            box-shadow: 0 0 0 10px rgba($primary, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba($primary, 0);
+        }
+    }
+
+    // Shake animation for errors
+    .shake-error {
+        animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+            transform: translateX(-5px);
+        }
+
+        20%,
+        40%,
+        60%,
+        80% {
+            transform: translateX(5px);
+        }
+    }
+}
+
+// Desktop Context Menu
+@include desktop {
+    .context-menu {
+        position: fixed;
+        background: $white;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-md;
+        box-shadow: $shadow-lg;
+        padding: $spacing-2 0;
+        z-index: 1000;
+        min-width: 150px;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.95);
+        transition: all 0.2s ease;
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .context-menu-item {
+            display: block;
+            padding: $spacing-2 $spacing-4;
+            color: $text-secondary;
+            text-decoration: none;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: rgba($primary, 0.1);
+                color: $primary;
+            }
+
+            &.disabled {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: $border-light;
+            margin: $spacing-2 0;
+        }
+    }
+}
+
+// Desktop Drag and Drop Enhancements
+@include desktop {
+    .drag-drop-zone {
+        border: 2px dashed $border-color;
+        border-radius: $border-radius-lg;
+        padding: $spacing-8;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: rgba($gray-50, 0.5);
+
+        &.drag-over {
+            border-color: $primary;
+            background: rgba($primary, 0.1);
+            transform: scale(1.02);
+        }
+
+        &.drag-active {
+            border-color: $success;
+            background: rgba($success, 0.1);
+        }
+
+        .drag-drop-icon {
+            font-size: 3rem;
+            color: $gray-400;
+            margin-bottom: $spacing-4;
+            transition: color 0.3s ease;
+        }
+
+        &.drag-over .drag-drop-icon {
+            color: $primary;
+        }
+    }
+}

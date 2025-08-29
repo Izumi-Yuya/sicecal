@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Interactions Test - Shise-Cal Design System</title>
+    <link href="public/build/assets/app-0VCF1s3R.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Form Interactions Test</h1>
+        
+        <!-- Form Toggle Test -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Form Toggle Test</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-toggle-container" data-form-toggle>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">施設名</label>
+                            <div class="form-display">テスト施設</div>
+                            <div class="form-edit" style="display: none;">
+                                <input type="text" class="form-control" name="facility_name" value="テスト施設">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">開設日</label>
+                            <div class="form-display">2020年4月1日</div>
+                            <div class="form-edit" style="display: none;">
+                                <input type="date" class="form-control" name="opening_date" value="2020-04-01">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Auto Calculator Test -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Auto Calculator Test</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label">開設日</label>
+                        <input type="date" class="form-control" id="opening-date" value="2020-04-01">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">運営年数（自動計算）</label>
+                        <div class="auto-calculated-field" data-auto-calculate="operating-years" data-depends-on="#opening-date">
+                            <div class="form-display" data-calculated-value></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <label class="form-label">土地価格（円）</label>
+                        <input type="number" class="form-control" id="land-price" value="50000000">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">土地面積（坪）</label>
+                        <input type="number" class="form-control" id="land-area" value="100">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">坪単価（自動計算）</label>
+                        <div class="auto-calculated-field" data-auto-calculate="land-unit-price" data-depends-on="#land-price, #land-area">
+                            <div class="form-display" data-calculated-value></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Form Validation Test -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Form Validation Test</h3>
+            </div>
+            <div class="card-body">
+                <form data-enhanced-validation>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">メールアドレス</label>
+                            <input type="email" class="form-control" data-validate="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">電話番号</label>
+                            <input type="tel" class="form-control" data-format="phone" data-validate="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="form-label">郵便番号</label>
+                            <input type="text" class="form-control" data-format="postal-code" data-validate="postal-code">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">金額</label>
+                            <input type="number" class="form-control" data-format="currency">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary mt-3">送信</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Component State Test -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Component State Test</h3>
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-info" onclick="showThemeConfig()">テーマ設定を表示</button>
+                <button type="button" class="btn btn-secondary" onclick="showComponentRegistry()">コンポーネント一覧を表示</button>
+                <button type="button" class="btn btn-warning" onclick="testAccessibility()">アクセシビリティテスト</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="public/build/assets/app-C5X2wEMZ.js"></script>
+    <script>
+        // Test functions
+        function showThemeConfig() {
+            console.log('Theme Configuration:', window.ThemeConfig || 'Not available');
+            alert('テーマ設定がコンソールに出力されました');
+        }
+        
+        function showComponentRegistry() {
+            if (window.componentRegistry) {
+                const components = window.componentRegistry.getAllComponents();
+                console.log('Registered Components:', components);
+                alert(`登録されたコンポーネント数: ${components.length}`);
+            } else {
+                alert('コンポーネントレジストリが利用できません');
+            }
+        }
+        
+        function testAccessibility() {
+            if (window.accessibilityEnhancer) {
+                window.accessibilityEnhancer.announce(document.body, 'アクセシビリティテストが実行されました');
+                alert('アクセシビリティテストが実行されました');
+            } else {
+                alert('アクセシビリティエンハンサーが利用できません');
+            }
+        }
+        
+        // Test event listeners
+        document.addEventListener('formToggle:editMode', (e) => {
+            console.log('Edit mode activated:', e.detail);
+        });
+        
+        document.addEventListener('formToggle:viewMode', (e) => {
+            console.log('View mode activated:', e.detail);
+        });
+        
+        document.addEventListener('autoCalculation:success', (e) => {
+            console.log('Auto calculation completed:', e.detail);
+        });
+        
+        document.addEventListener('component:initialized', (e) => {
+            console.log('Component initialized:', e.detail);
+        });
+    </script>
+</body>
+</html>

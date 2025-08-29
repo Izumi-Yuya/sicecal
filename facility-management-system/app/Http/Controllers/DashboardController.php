@@ -58,16 +58,25 @@ class DashboardController extends Controller
             return null;
         }
 
-        // Create a mock user object with role information
-        return (object) [
-            'name' => $sessionUser['name'],
-            'role' => $sessionUser['role'],
-            'role_display' => $sessionUser['role_display'],
-            'logged_in_at' => $sessionUser['logged_in_at'],
-            'department_id' => 1, // Mock department ID
-            'region_id' => 1,     // Mock region ID  
-            'facility_id' => 1    // Mock facility ID
-        ];
+        // Handle both array and object formats for backward compatibility
+        if (is_array($sessionUser)) {
+            // Create a mock user object with role information
+            return (object) [
+                'name' => $sessionUser['name'],
+                'role' => $sessionUser['role'],
+                'role_display' => $sessionUser['role_display'],
+                'logged_in_at' => $sessionUser['logged_in_at'],
+                'department_id' => 1, // Mock department ID
+                'region_id' => 1,     // Mock region ID  
+                'facility_id' => 1    // Mock facility ID
+            ];
+        } else {
+            // Session user is already an object, add missing properties
+            $sessionUser->department_id = 1; // Mock department ID
+            $sessionUser->region_id = 1;     // Mock region ID  
+            $sessionUser->facility_id = 1;   // Mock facility ID
+            return $sessionUser;
+        }
     }
 
     /**

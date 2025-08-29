@@ -68,7 +68,7 @@ class FacilityController extends Controller
         // Apply role-based access control
         $user = session('user');
         if ($user) {
-            $userRole = $user['role'];
+            $userRole = is_array($user) ? $user['role'] : $user->role;
             
             switch ($userRole) {
                 case 'system_admin':

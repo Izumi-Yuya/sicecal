@@ -1,0 +1,105 @@
+/*
+ * Design Tokens - Breakpoints
+ * 
+ * Desktop-first responsive breakpoints for the facility management system
+ * Optimized for desktop usage with mobile/tablet as secondary targets
+ */
+
+// Desktop-First Breakpoints
+$desktop-xl: 1400px; // Large desktop displays (1920x1080+)
+$desktop: 1200px; // Standard desktop displays (1366x768+)
+$tablet-lg: 992px; // Tablet landscape / small desktop
+$tablet: 768px; // Tablet portrait
+$mobile-lg: 576px; // Large mobile / small tablet
+$mobile: 480px; // Mobile landscape
+$mobile-sm: 375px; // Mobile portrait
+
+// Breakpoint Map for Utility Generation
+$breakpoints: (
+    sm: $mobile-lg,
+    md: $tablet,
+    lg: $tablet-lg,
+    xl: $desktop,
+    xxl: $desktop-xl
+);
+
+// Desktop-First Media Query Mixins
+@mixin desktop-xl {
+    @media (min-width: #{$desktop-xl}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+@mixin tablet-lg-down {
+    @media (max-width: #{$tablet-lg - 0.02px}) {
+        @content;
+    }
+}
+
+@mixin tablet-down {
+    @media (max-width: #{$tablet - 0.02px}) {
+        @content;
+    }
+}
+
+@mixin mobile-lg-down {
+    @media (max-width: #{$mobile-lg - 0.02px}) {
+        @content;
+    }
+}
+
+@mixin mobile-down {
+    @media (max-width: #{$mobile - 0.02px}) {
+        @content;
+    }
+}
+
+@mixin mobile-sm-down {
+    @media (max-width: #{$mobile-sm - 0.02px}) {
+        @content;
+    }
+}
+
+// Range Mixins
+@mixin desktop-only {
+    @media (min-width: #{$desktop}) and (max-width: #{$desktop-xl - 0.02px}) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media (min-width: #{$tablet}) and (max-width: #{$tablet-lg - 0.02px}) {
+        @content;
+    }
+}
+
+@mixin mobile-only {
+    @media (min-width: #{$mobile-lg}) and (max-width: #{$tablet - 0.02px}) {
+        @content;
+    }
+}
+
+// Desktop-Optimized Layout Breakpoints
+$layout-desktop-min: $desktop; // Minimum width for desktop layout
+$layout-tablet-max: $tablet-lg - 0.02px; // Maximum width for tablet layout
+$layout-mobile-max: $tablet - 0.02px; // Maximum width for mobile layout
+
+// Form Layout Breakpoints
+$form-multi-column-min: $desktop; // Minimum width for multi-column forms
+$form-two-column-min: $tablet-lg; // Minimum width for two-column forms
+$form-single-column-max: $tablet - 0.02px; // Maximum width for single-column forms
+
+// Data Table Breakpoints
+$table-full-width-min: $desktop; // Minimum width for full table display
+$table-scroll-min: $tablet-lg; // Minimum width for horizontal scroll
+$table-card-max: $tablet - 0.02px; // Maximum width for card layout
+
+// Navigation Breakpoints
+$sidebar-fixed-min: $tablet-lg; // Minimum width for fixed sidebar
+$sidebar-overlay-max: $tablet-lg - 0.02px; // Maximum width for overlay sidebar

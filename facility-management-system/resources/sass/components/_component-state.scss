@@ -1,0 +1,414 @@
+/**
+ * Component State Management Styles
+ * Styles for component state management and accessibility enhancements
+ */
+
+// Focus management styles
+.focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+// Remove default focus styles when using custom focus management
+*:focus {
+    outline: none;
+}
+
+// High contrast focus indicators
+@media (prefers-contrast: high) {
+    .focus-visible {
+        outline-width: 3px;
+        outline-color: var(--bs-dark);
+    }
+}
+
+// Screen reader only content
+.sr-only,
+.sr-live-region {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+// Component initialization states
+[data-component-id] {
+    &.component-initializing {
+        opacity: 0.7;
+        pointer-events: none;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid var(--bs-primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: componentSpin 1s linear infinite;
+        }
+    }
+
+    &.component-error {
+        border: 2px solid var(--bs-danger);
+        background-color: rgba(var(--bs-danger-rgb), 0.1);
+
+        &::before {
+            content: '⚠';
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            color: var(--bs-danger);
+            font-weight: bold;
+            z-index: 10;
+        }
+    }
+
+    &.component-ready {
+        transition: opacity 0.3s ease;
+    }
+}
+
+// Keyboard navigation enhancements
+.keyboard-navigable {
+    position: relative;
+
+    // Navigation hints
+    &:focus-within::after {
+        content: attr(data-keyboard-hint);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        z-index: var(--bs-zindex-tooltip);
+        opacity: 0;
+        animation: fadeInUp 0.3s ease forwards;
+    }
+}
+
+// List navigation styles
+[role="listbox"],
+[role="menu"],
+.nav {
+
+    .nav-item,
+    [role="option"],
+    [role="menuitem"] {
+        &:focus {
+            background-color: rgba(var(--bs-primary-rgb), 0.1);
+            color: var(--bs-primary);
+        }
+
+        &[aria-selected="true"] {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+    }
+}
+
+// Modal focus trap styles
+.modal {
+    &.focus-trapped {
+        .modal-content {
+            outline: 2px solid var(--bs-primary);
+            outline-offset: -2px;
+        }
+    }
+}
+
+// Accessibility announcements
+.accessibility-announcements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--bs-zindex-modal);
+    pointer-events: none;
+
+    .announcement {
+        background: var(--bs-dark);
+        color: white;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 8px;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+
+        &.show {
+            transform: translateY(0);
+        }
+
+        &.success {
+            background: var(--bs-success);
+        }
+
+        &.warning {
+            background: var(--bs-warning);
+            color: var(--bs-dark);
+        }
+
+        &.error {
+            background: var(--bs-danger);
+        }
+    }
+}
+
+// Component registry debug styles (development only)
+.component-debug {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    max-width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: var(--bs-zindex-modal);
+
+    .debug-header {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .component-item {
+        margin-bottom: 0.5rem;
+        padding: 0.25rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+
+        .component-type {
+            color: var(--bs-info);
+            font-weight: bold;
+        }
+
+        .component-id {
+            color: var(--bs-warning);
+            font-size: 0.7rem;
+        }
+
+        .component-element {
+            color: var(--bs-success);
+            font-size: 0.7rem;
+        }
+    }
+}
+
+// Theme configuration visualization
+.theme-config-display {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    background: white;
+    border: 1px solid var(--bs-gray-300);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: var(--bs-box-shadow);
+    max-width: 300px;
+    z-index: var(--bs-zindex-popover);
+
+    .theme-section {
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: var(--bs-gray-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            border: 1px solid var(--bs-gray-300);
+            vertical-align: middle;
+        }
+
+        .token-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+            font-size: 0.75rem;
+
+            .token-name {
+                color: var(--bs-gray-600);
+            }
+
+            .token-value {
+                font-family: monospace;
+                color: var(--bs-gray-800);
+            }
+        }
+    }
+}
+
+// Event manager visualization
+.event-debug {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    max-width: 400px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: var(--bs-zindex-modal);
+
+    .event-item {
+        padding: 0.25rem;
+        margin-bottom: 0.25rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+
+        .event-type {
+            color: var(--bs-warning);
+            font-weight: bold;
+        }
+
+        .event-target {
+            color: var(--bs-info);
+        }
+
+        .event-time {
+            color: var(--bs-success);
+            font-size: 0.7rem;
+        }
+    }
+}
+
+// Animations
+@keyframes componentSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+
+    .component-debug,
+    .theme-config-display,
+    .event-debug {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        margin: 1rem;
+        max-width: none;
+    }
+
+    .keyboard-navigable {
+        &:focus-within::after {
+            display: none;
+        }
+    }
+}
+
+// Print styles
+@media print {
+
+    .component-debug,
+    .theme-config-display,
+    .event-debug,
+    .accessibility-announcements {
+        display: none !important;
+    }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+    [data-component-id] {
+        &.component-initializing {
+            &::after {
+                animation: none;
+                border: 2px solid var(--bs-primary);
+            }
+        }
+    }
+
+    .keyboard-navigable {
+        &:focus-within::after {
+            animation: none;
+            opacity: 1;
+        }
+    }
+
+    .accessibility-announcements {
+        .announcement {
+            transition: none;
+            transform: translateY(0);
+        }
+    }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+    .theme-config-display {
+        background: var(--bs-gray-800);
+        border-color: var(--bs-gray-600);
+        color: white;
+
+        .section-title {
+            color: var(--bs-gray-300);
+        }
+
+        .token-item {
+            .token-name {
+                color: var(--bs-gray-400);
+            }
+
+            .token-value {
+                color: var(--bs-gray-200);
+            }
+        }
+    }
+}
