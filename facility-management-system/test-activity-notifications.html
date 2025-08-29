@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity and Notification Components Test</title>
+    <link href="public/build/assets/app-CEPuxKT5.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container-fluid py-4">
+        <h1 class="mb-4">Activity and Notification Components Test</h1>
+        
+        <!-- Recent Activities Component -->
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">最近の活動</h6>
+                        <a href="#" class="btn btn-sm btn-outline-primary">すべて見る</a>
+                    </div>
+                    <div class="card-body recent-activities">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="activity-content">
+                                    <div class="activity-main">
+                                        <div class="activity-title">施設情報が更新されました</div>
+                                        <div class="activity-description">東京第一老人ホームの基本情報が田中太郎によって更新されました</div>
+                                    </div>
+                                    <div class="activity-time">2時間前</div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="activity-content">
+                                    <div class="activity-main">
+                                        <div class="activity-title">新規コメントが投稿されました</div>
+                                        <div class="activity-description">大阪グループホームに新しいコメントが投稿されました</div>
+                                    </div>
+                                    <div class="activity-time">4時間前</div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="activity-content">
+                                    <div class="activity-main">
+                                        <div class="activity-title">承認が完了しました</div>
+                                        <div class="activity-description">名古屋デイサービスセンターの変更申請が承認されました</div>
+                                    </div>
+                                    <div class="activity-time">1日前</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions Component -->
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">クイックアクション</h6>
+                    </div>
+                    <div class="card-body quick-actions">
+                        <div class="d-grid gap-2">
+                            <a href="#" class="action-btn action-primary">
+                                <i class="bi bi-plus-circle"></i>新規施設登録
+                            </a>
+                            <a href="#" class="action-btn action-success">
+                                <i class="bi bi-search"></i>施設検索
+                            </a>
+                            <a href="#" class="action-btn action-warning">
+                                <i class="bi bi-check-circle"></i>承認待ち確認
+                            </a>
+                            <a href="#" class="action-btn action-info">
+                                <i class="bi bi-file-earmark-spreadsheet"></i>レポート出力
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Components -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-info">対応待ちコメント</h6>
+                    </div>
+                    <div class="card-body pending-items">
+                        <div class="pending-item">
+                            <div class="pending-title">東京第一老人ホーム</div>
+                            <div class="pending-description">設備の修理について確認が必要です。エアコンの調子が悪いようです。</div>
+                            <div class="pending-meta">田中太郎<span class="meta-separator">•</span>2時間前</div>
+                        </div>
+                        <div class="pending-item">
+                            <div class="pending-title">大阪グループホーム</div>
+                            <div class="pending-description">来月の契約更新について相談があります。</div>
+                            <div class="pending-meta">佐藤花子<span class="meta-separator">•</span>5時間前</div>
+                        </div>
+                        <div class="pending-item">
+                            <div class="pending-title">名古屋デイサービス</div>
+                            <div class="pending-description">利用者数の変更申請を提出しました。</div>
+                            <div class="pending-meta">山田次郎<span class="meta-separator">•</span>1日前</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-success">承認待ち</h6>
+                    </div>
+                    <div class="card-body pending-items">
+                        <div class="pending-item">
+                            <div class="pending-title">福岡ヘルパーステーション</div>
+                            <div class="pending-description">施設情報変更申請</div>
+                            <div class="pending-meta">鈴木一郎<span class="meta-separator">•</span>3時間前</div>
+                        </div>
+                        <div class="pending-item">
+                            <div class="pending-title">札幌ケアプランセンター</div>
+                            <div class="pending-description">新規登録申請</div>
+                            <div class="pending-meta">高橋美咲<span class="meta-separator">•</span>6時間前</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Alerts -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">通知アラート</h6>
+                    </div>
+                    <div class="card-body notification-alerts">
+                        <div class="notification-item notification-system">
+                            <div class="notification-content">
+                                <i class="bi bi-info-circle notification-icon"></i>
+                                <div class="notification-body">
+                                    <div class="notification-title">システムメンテナンス予告</div>
+                                    <div class="notification-message">明日午前2時〜6時にシステムメンテナンスを実施します。</div>
+                                    <div class="notification-time">1時間前</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item notification-approval">
+                            <div class="notification-content">
+                                <i class="bi bi-check-circle notification-icon"></i>
+                                <div class="notification-body">
+                                    <div class="notification-title">承認完了通知</div>
+                                    <div class="notification-message">東京第二老人ホームの変更申請が承認されました。</div>
+                                    <div class="notification-time">2時間前</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item notification-comment">
+                            <div class="notification-content">
+                                <i class="bi bi-chat-dots notification-icon"></i>
+                                <div class="notification-body">
+                                    <div class="notification-title">新規コメント</div>
+                                    <div class="notification-message">大阪グループホームに新しいコメントが投稿されました。</div>
+                                    <div class="notification-time">3時間前</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item notification-warning">
+                            <div class="notification-content">
+                                <i class="bi bi-exclamation-triangle notification-icon"></i>
+                                <div class="notification-body">
+                                    <div class="notification-title">契約期限警告</div>
+                                    <div class="notification-message">名古屋デイサービスの契約が来月末に期限切れとなります。</div>
+                                    <div class="notification-time">4時間前</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item notification-error">
+                            <div class="notification-content">
+                                <i class="bi bi-x-circle notification-icon"></i>
+                                <div class="notification-body">
+                                    <div class="notification-title">エラー通知</div>
+                                    <div class="notification-message">データの同期中にエラーが発生しました。</div>
+                                    <div class="notification-time">5時間前</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contract Alerts -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-warning">契約期限アラート</h6>
+                    </div>
+                    <div class="card-body contract-alerts">
+                        <div class="alert alert-danger">
+                            <strong>東京第一老人ホーム</strong>
+                            <div class="contract-info">賃貸契約: 2024年12月31日まで</div>
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>大阪グループホーム</strong>
+                            <div class="contract-info">保険契約: 2025年2月28日まで</div>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>名古屋デイサービス</strong>
+                            <div class="contract-info">サービス契約: 2025年6月30日まで</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Empty State Example -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">空の状態例</h6>
+                    </div>
+                    <div class="card-body recent-activities">
+                        <div class="empty-state">
+                            <i class="bi bi-inbox"></i>
+                            <p>最近の活動はありません</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
