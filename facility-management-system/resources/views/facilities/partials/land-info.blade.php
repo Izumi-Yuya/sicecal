@@ -28,18 +28,28 @@
                         <input type="number" step="0.01" class="form-control form-edit d-none" name="site_area_sqm" value="{{ $facility->site_area_sqm }}" placeholder="例）290.00">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">敷地面積（坪数）</label>
-                        <div class="form-display">{{ $facility->site_area_tsubo ? number_format($facility->site_area_tsubo, 2) . '坪' : '未設定' }}</div>
-                        <input type="number" step="0.01" class="form-control form-edit d-none" name="site_area_tsubo" value="{{ $facility->site_area_tsubo }}" placeholder="例）89.05">
+                        <div class="form-toggle-container manual-input-field">
+                            <label class="form-label">敷地面積（坪数）</label>
+                            <div class="form-display {{ empty($facility->site_area_tsubo) ? 'empty' : '' }}">{{ $facility->site_area_tsubo ? number_format($facility->site_area_tsubo, 2) . '坪' : '' }}</div>
+                            <div class="form-edit">
+                                <input type="number" step="0.01" class="form-control" name="site_area_tsubo" value="{{ $facility->site_area_tsubo }}" placeholder="例）89.05">
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">購入金額</label>
-                        <div class="form-display">{{ $facility->land_purchase_price ? '¥' . number_format($facility->land_purchase_price) : '未設定' }}</div>
-                        <input type="number" class="form-control form-edit d-none" name="land_purchase_price" value="{{ $facility->land_purchase_price }}" placeholder="例）10000000">
+                        <div class="form-toggle-container manual-input-field">
+                            <label class="form-label">購入金額</label>
+                            <div class="form-display {{ empty($facility->land_purchase_price) ? 'empty' : '' }}">{{ $facility->land_purchase_price ? '¥' . number_format($facility->land_purchase_price) : '' }}</div>
+                            <div class="form-edit">
+                                <input type="number" class="form-control" name="land_purchase_price" value="{{ $facility->land_purchase_price }}" placeholder="例）10000000">
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">坪単価（自動計算）</label>
-                        <div class="form-display text-info land-unit-price-display">{{ $facility->land_unit_price ? '¥' . $facility->land_unit_price . '/坪' : '未計算' }}</div>
+                        <div class="auto-calculated-field" data-calculation="land-unit-price" data-depends-on="input[name='land_purchase_price'], input[name='site_area_tsubo']">
+                            <label class="form-label">坪単価（自動計算）</label>
+                            <div class="form-display">{{ $facility->land_unit_price ? '¥' . number_format($facility->land_unit_price) . '/坪' : '' }}</div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">家賃</label>

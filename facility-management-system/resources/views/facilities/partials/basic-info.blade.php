@@ -5,21 +5,29 @@
             <h5 class="card-title mb-0">基本情報</h5>
         </div>
         <div class="card-body">
-            <form id="basicForm">
+            <form id="basicForm" data-enhanced-validation>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">会社名</label>
-                        <div class="form-display">{{ $facility->company_name ?? '未設定' }}</div>
-                        <select class="form-select form-edit d-none" name="company_name">
-                            <option value="">選択してください</option>
-                            <option value="株式会社シダー" {{ $facility->company_name === '株式会社シダー' ? 'selected' : '' }}>株式会社シダー</option>
-                            <option value="株式会社パイン" {{ $facility->company_name === '株式会社パイン' ? 'selected' : '' }}>株式会社パイン</option>
-                        </select>
+                        <div class="form-toggle-container">
+                            <label class="form-label">会社名</label>
+                            <div class="form-display {{ empty($facility->company_name) ? 'empty' : '' }}">{{ $facility->company_name ?? '' }}</div>
+                            <div class="form-edit">
+                                <select class="form-select" name="company_name">
+                                    <option value="">選択してください</option>
+                                    <option value="株式会社シダー" {{ $facility->company_name === '株式会社シダー' ? 'selected' : '' }}>株式会社シダー</option>
+                                    <option value="株式会社パイン" {{ $facility->company_name === '株式会社パイン' ? 'selected' : '' }}>株式会社パイン</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">事業所コード</label>
-                        <div class="form-display">{{ $facility->facility_code ?? '未設定' }}</div>
-                        <input type="text" class="form-control form-edit d-none" name="facility_code" value="{{ $facility->facility_code }}" placeholder="例）12345">
+                        <div class="form-toggle-container">
+                            <label class="form-label">事業所コード</label>
+                            <div class="form-display {{ empty($facility->facility_code) ? 'empty' : '' }}">{{ $facility->facility_code ?? '' }}</div>
+                            <div class="form-edit">
+                                <input type="text" class="form-control" name="facility_code" value="{{ $facility->facility_code }}" placeholder="例）12345">
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">指定番号</label>
@@ -78,13 +86,19 @@
                         <input type="url" class="form-control form-edit d-none" name="url" value="{{ $facility->url }}" placeholder="例）https://www.example.com">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">開設日</label>
-                        <div class="form-display">{{ $facility->opening_date ? $facility->opening_date->format('Y年m月d日') : '未設定' }}</div>
-                        <input type="date" class="form-control form-edit d-none" name="opening_date" value="{{ $facility->opening_date ? $facility->opening_date->format('Y-m-d') : '' }}">
+                        <div class="form-toggle-container">
+                            <label class="form-label">開設日</label>
+                            <div class="form-display {{ empty($facility->opening_date) ? 'empty' : '' }}">{{ $facility->opening_date ? $facility->opening_date->format('Y年m月d日') : '' }}</div>
+                            <div class="form-edit">
+                                <input type="date" class="form-control" name="opening_date" value="{{ $facility->opening_date ? $facility->opening_date->format('Y-m-d') : '' }}">
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">開設年数（自動計算）</label>
-                        <div class="form-display text-info operating-years-display">{{ $facility->operating_years ?? '未計算' }}</div>
+                        <div class="auto-calculated-field" data-calculation="operating-years" data-depends-on="input[name='opening_date']">
+                            <label class="form-label">開設年数（自動計算）</label>
+                            <div class="form-display">{{ $facility->operating_years ?? '' }}</div>
+                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">部門</label>

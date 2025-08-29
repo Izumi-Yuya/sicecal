@@ -82,29 +82,29 @@
   - Create scroll behavior optimization for desktop usage
   - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
-- [ ] 5. Create facility form patterns
-- [ ] 5.1 Implement tabbed interface styling
+- [x] 5. Create facility form patterns
+- [x] 5.1 Implement tabbed interface styling
   - Create facility tab navigation styles with active state indicators
   - Implement tab content area styling with consistent padding
   - Add tab transition animations and fade effects
   - Create responsive tab behavior for different screen sizes
   - _Requirements: 2.1, 2.2, 2.3, 4.1, 4.2, 5.1, 5.2_
 
-- [ ] 5.2 Create form display/edit toggle system
+- [x] 5.2 Create form display/edit toggle system
   - Implement form-display and form-edit CSS classes
   - Create JavaScript utility class for toggling between display and edit modes
   - Add smooth transitions between display and edit states
   - Implement "未設定" placeholder styling for empty fields
   - _Requirements: 3.1, 3.2, 3.3, 6.1, 6.2_
 
-- [ ] 5.3 Implement auto-calculation field styling
+- [x] 5.3 Implement auto-calculation field styling
   - Create text-info styling for auto-calculated fields with visual indicators
   - Add JavaScript utility for calculating operating years from opening date
   - Implement real-time calculation updates with visual feedback
   - Create consistent styling for calculated vs manual input fields
   - _Requirements: 3.1, 3.2, 3.3, 6.1, 6.2_
 
-- [ ] 5.4 Create accordion and dropdown patterns
+- [x] 5.4 Create accordion and dropdown patterns
   - Implement accordion component styling for utility sections
   - Create dropdown menu styling with consistent borders and shadows
   - Add accordion expand/collapse animations

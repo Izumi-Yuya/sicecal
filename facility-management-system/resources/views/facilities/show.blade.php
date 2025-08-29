@@ -6,13 +6,15 @@
 <div class="container-fluid">
     @include('facilities.partials.header')
     
-    @include('facilities.partials.tabs-nav')
+    <div class="facility-tabs">
+        @include('facilities.partials.tabs-nav')
 
-    <!-- Tab Content -->
-    <div class="tab-content" id="facilityTabContent">
-        @include('facilities.partials.basic-info')
-        @include('facilities.partials.land-info')
-        @include('facilities.partials.other-tabs')
+        <!-- Tab Content -->
+        <div class="tab-content" id="facilityTabContent">
+            @include('facilities.partials.basic-info')
+            @include('facilities.partials.land-info')
+            @include('facilities.partials.other-tabs')
+        </div>
     </div>
 </div>
 

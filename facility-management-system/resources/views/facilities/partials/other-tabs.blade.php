@@ -58,44 +58,77 @@
             </ul>
         </div>
         <div class="card-body">
-            <!-- 電気設備 -->
-            <div class="utilities-section" data-category="electrical">
-                <h6 class="border-bottom pb-2 mb-3">
-                    <i class="bi bi-lightning-charge me-2"></i>電気設備
-                </h6>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">電力会社</label>
-                        <div class="form-display">未設定</div>
-                        <input type="text" class="form-control form-edit d-none" name="electrical_company" placeholder="例）東京電力">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">契約容量</label>
-                        <div class="form-display">未設定</div>
-                        <input type="text" class="form-control form-edit d-none" name="electrical_capacity" placeholder="例）50kW">
+            <!-- Utilities Accordion -->
+            <div class="accordion facility-accordion utilities-accordion" id="utilitiesAccordion">
+                <!-- 電気設備 -->
+                <div class="accordion-item utilities-section" data-category="electrical">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#electricalCollapse" aria-expanded="true" aria-controls="electricalCollapse">
+                            <i class="bi bi-lightning-charge me-2"></i>電気設備
+                        </button>
+                    </h2>
+                    <div id="electricalCollapse" class="accordion-collapse collapse show" data-bs-parent="#utilitiesAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-toggle-container">
+                                        <label class="form-label">電力会社</label>
+                                        <div class="form-display empty"></div>
+                                        <div class="form-edit">
+                                            <input type="text" class="form-control" name="electrical_company" placeholder="例）東京電力">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-toggle-container">
+                                        <label class="form-label">契約容量</label>
+                                        <div class="form-display empty"></div>
+                                        <div class="form-edit">
+                                            <input type="text" class="form-control" name="electrical_capacity" placeholder="例）50kW">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ガス設備 -->
-            <div class="utilities-section" data-category="gas">
-                <h6 class="border-bottom pb-2 mb-3">
-                    <i class="bi bi-fire me-2"></i>ガス設備
-                </h6>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">ガス会社</label>
-                        <div class="form-display">未設定</div>
-                        <input type="text" class="form-control form-edit d-none" name="gas_company" placeholder="例）東京ガス">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">ガス種別</label>
-                        <div class="form-display">未設定</div>
-                        <select class="form-select form-edit d-none" name="gas_type">
-                            <option value="">選択してください</option>
-                            <option value="都市ガス">都市ガス</option>
-                            <option value="プロパンガス">プロパンガス</option>
-                        </select>
+                <!-- ガス設備 -->
+                <div class="accordion-item utilities-section" data-category="gas">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#gasCollapse" aria-expanded="false" aria-controls="gasCollapse">
+                            <i class="bi bi-fire me-2"></i>ガス設備
+                        </button>
+                    </h2>
+                    <div id="gasCollapse" class="accordion-collapse collapse" data-bs-parent="#utilitiesAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-toggle-container">
+                                        <label class="form-label">ガス会社</label>
+                                        <div class="form-display empty"></div>
+                                        <div class="form-edit">
+                                            <input type="text" class="form-control" name="gas_company" placeholder="例）東京ガス">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-toggle-container">
+                                        <label class="form-label">ガス種別</label>
+                                        <div class="form-display empty"></div>
+                                        <div class="form-edit">
+                                            <div class="facility-dropdown">
+                                                <select class="form-select dropdown-toggle" name="gas_type">
+                                                    <option value="">選択してください</option>
+                                                    <option value="都市ガス">都市ガス</option>
+                                                    <option value="プロパンガス">プロパンガス</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,9 @@ import './bootstrap';
 // Import our custom Sass
 import '../sass/app.scss';
 
+// Import form utilities
+import './form-utilities';
+
 // Custom JavaScript for the application
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Bootstrap components
